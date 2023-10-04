@@ -1,14 +1,10 @@
 "use client";
 
-import { Slider } from "@/components/ui/slider";
 import {
   ThemeContextDebugger,
   ThemeContextProvider,
   useThemeContext,
 } from "@/components/contexts/ThemeContext/ThemeContext";
-import { useEffect, useState } from "react";
-import { isHexColor } from "@/lib/colors";
-import { Input } from "@/components/ui/input";
 import { HexInput } from "@/app/components/HexInput";
 import { RGBSliders } from "@/app/components/RGBSliders";
 

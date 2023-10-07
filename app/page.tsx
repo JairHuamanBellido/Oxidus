@@ -8,6 +8,7 @@ import {
 import { HexInput } from "@/app/components/HexInput";
 import { RGBSliders } from "@/app/components/RGBSliders";
 import DarkThemeSettingSection from "./components/DarkThemeSettingSection";
+import LightThemeSettingSection from "./components/LightThemeSettingSection";
 
 export default function Home() {
   return (
@@ -32,6 +33,7 @@ function PageContent() {
 
       <div className={"w-24 h-24"} style={{ backgroundColor: hex }}></div>
       <DarkThemeSettingSection />
+      <LightThemeSettingSection />
     </main>
   );
 }

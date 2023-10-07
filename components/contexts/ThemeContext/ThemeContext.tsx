@@ -13,6 +13,10 @@ export type ThemeVariables = {
   darkness: number;
   darkColorsHueAngle: number;
   darkColorsSaturation: number;
+  lightColorsAmount: number;
+  lightness: number;
+  lightColorsHueAngle: number;
+  lightColorsSaturation: number;
 };
 
 export type ThemeContextType = ThemeVariables & {
@@ -26,6 +30,15 @@ export type ThemeContextType = ThemeVariables & {
       | "darkColorsHueAngle"
       | "darkness"
       | "darkColorsSaturation"
+    >,
+  ) => void;
+  setLightThemeSettings: (
+    lightThemeSettings: Pick<
+      ThemeVariables,
+      | "lightColorsAmount"
+      | "lightColorsHueAngle"
+      | "lightness"
+      | "lightColorsSaturation"
     >,
   ) => void;
 };
@@ -45,6 +58,10 @@ function getThemeVariablesDefaultValues(): ThemeVariables {
     darkness: 0,
     darkColorsHueAngle: 0,
     darkColorsSaturation: 0,
+    lightColorsAmount: 5,
+    lightness: 0,
+    lightColorsHueAngle: 0,
+    lightColorsSaturation: 0,
   };
 }
 
@@ -54,6 +71,7 @@ const ThemeContext = createContext<ThemeContextType>({
   setRGB: () => {},
   setHex: () => {},
   setDarkThemeSettings: () => {},
+  setLightThemeSettings: () => {},
 });
 
 export function ThemeContextProvider({ children }: { children: ReactNode }) {
@@ -124,7 +142,30 @@ export function ThemeContextProvider({ children }: { children: ReactNode }) {
       darkness,
     });
   }
+  function setLightThemeSettings(
+    lightThemeSettings: Pick<
+      ThemeVariables,
+      | "lightColorsAmount"
+      | "lightColorsHueAngle"
+      | "lightness"
+      | "lightColorsSaturation"
+    >,
+  ) {
+    const {
+      lightColorsAmount,
+      lightColorsHueAngle,
+      lightColorsSaturation,
+      lightness,
+    } = lightThemeSettings;
 
+    setVariables({
+      ...variables,
+      lightColorsAmount,
+      lightColorsHueAngle,
+      lightColorsSaturation,
+      lightness,
+    });
+  }
   return (
     <ThemeContext.Provider
       value={{
@@ -133,6 +174,7 @@ export function ThemeContextProvider({ children }: { children: ReactNode }) {
         setRGB,
         setHex,
         setDarkThemeSettings,
+        setLightThemeSettings,
       }}
     >
       {children}

@@ -2,6 +2,7 @@
 
 import { createContext, ReactNode, useContext, useState } from "react";
 import Color from "color";
+import { getColorsList } from "@/src/utils/getColorsList";
 
 export type ThemeVariables = {
   mainColor: number;
@@ -17,6 +18,8 @@ export type ThemeVariables = {
   lightness: number;
   lightColorsHueAngle: number;
   lightColorsSaturation: number;
+  darkColors: string[];
+  lightColors: string[];
 };
 
 export type ThemeContextType = ThemeVariables & {
@@ -41,6 +44,8 @@ export type ThemeContextType = ThemeVariables & {
       | "lightColorsSaturation"
     >,
   ) => void;
+  setDarkColors: (colors: string[]) => void;
+  setLightColors: (colors: string[]) => void;
 };
 
 const DEFAULT_COLOR = 0x1d9a6c;
@@ -55,13 +60,15 @@ function getThemeVariablesDefaultValues(): ThemeVariables {
     g: color.green(),
     b: color.blue(),
     darkColorsAmount: 5,
-    darkness: 0,
+    darkness: 90,
     darkColorsHueAngle: 0,
     darkColorsSaturation: 0,
     lightColorsAmount: 5,
-    lightness: 0,
+    lightness: 90,
     lightColorsHueAngle: 0,
     lightColorsSaturation: 0,
+    darkColors: getColorsList(5, 90, "black", 0, 0, color.hex()),
+    lightColors: getColorsList(5, 90, "white", 0, 0, color.hex()),
   };
 }
 
@@ -72,12 +79,35 @@ const ThemeContext = createContext<ThemeContextType>({
   setHex: () => {},
   setDarkThemeSettings: () => {},
   setLightThemeSettings: () => {},
+  setDarkColors: () => {},
+  setLightColors: () => {},
 });
 
 export function ThemeContextProvider({ children }: { children: ReactNode }) {
   const [variables, setVariables] = useState<ThemeVariables>(() =>
     getThemeVariablesDefaultValues(),
   );
+
+  function updatePaletteThemes() {
+    return {
+      lightColors: getColorsList(
+        variables.lightColorsAmount,
+        variables.lightness,
+        "white",
+        variables.lightColorsHueAngle,
+        variables.lightColorsSaturation,
+        variables.hex,
+      ),
+      darkColors: getColorsList(
+        variables.darkColorsAmount,
+        variables.darkness,
+        "black",
+        variables.darkColorsHueAngle,
+        variables.darkColorsSaturation,
+        variables.hex,
+      ),
+    };
+  }
 
   function setMainColor(color: number) {
     const obj = Color(color);
@@ -89,6 +119,7 @@ export function ThemeContextProvider({ children }: { children: ReactNode }) {
       r: obj.red(),
       g: obj.green(),
       b: obj.blue(),
+      ...updatePaletteThemes(),
     });
   }
 
@@ -102,6 +133,7 @@ export function ThemeContextProvider({ children }: { children: ReactNode }) {
       r,
       g,
       b,
+      ...updatePaletteThemes(),
     });
   }
 
@@ -115,6 +147,7 @@ export function ThemeContextProvider({ children }: { children: ReactNode }) {
       r: obj.red(),
       g: obj.green(),
       b: obj.blue(),
+      ...updatePaletteThemes(),
     });
   }
 
@@ -140,6 +173,14 @@ export function ThemeContextProvider({ children }: { children: ReactNode }) {
       darkColorsHueAngle,
       darkColorsSaturation,
       darkness,
+      darkColors: getColorsList(
+        darkColorsAmount,
+        darkness,
+        "black",
+        darkColorsHueAngle,
+        darkColorsSaturation,
+        variables.hex,
+      ),
     });
   }
   function setLightThemeSettings(
@@ -164,7 +205,22 @@ export function ThemeContextProvider({ children }: { children: ReactNode }) {
       lightColorsHueAngle,
       lightColorsSaturation,
       lightness,
+      lightColors: getColorsList(
+        lightColorsAmount,
+        lightness,
+        "white",
+        lightColorsHueAngle,
+        lightColorsSaturation,
+        variables.hex,
+      ),
     });
+  }
+
+  function setDarkColors(colors: string[]) {
+    setDarkColors(colors);
+  }
+  function setLightColors(colors: string[]) {
+    setDarkColors(colors);
   }
   return (
     <ThemeContext.Provider
@@ -175,6 +231,8 @@ export function ThemeContextProvider({ children }: { children: ReactNode }) {
         setHex,
         setDarkThemeSettings,
         setLightThemeSettings,
+        setDarkColors,
+        setLightColors,
       }}
     >
       {children}

@@ -9,7 +9,6 @@ import { HexInput } from "@/app/components/HexInput";
 import { RGBSliders } from "@/app/components/RGBSliders";
 import DarkThemeSettingSection from "./components/DarkThemeSettingSection";
 import LightThemeSettingSection from "./components/LightThemeSettingSection";
-import BlockColor from "./components/BlockColor";
 import HorizontalPaletteColors from "./components/HorizontalPaletteColors";
 
 export default function Home() {
@@ -23,12 +22,8 @@ export default function Home() {
 }
 
 function PageContent() {
-  const { hex } = useThemeContext();
-
   return (
     <main className={`min-h-screen p-8 flex flex-col gap-6`}>
-      <span>Color</span>
-
       <HexInput />
 
       <RGBSliders />

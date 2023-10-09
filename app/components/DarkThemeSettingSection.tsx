@@ -47,6 +47,8 @@ export default function DarkThemeSettingSection() {
       <ThemeSettingSlider
         label="Dark colors hue angle"
         value={darkColorsHueAngle}
+        min={-360}
+        max={360}
         onValueChange={(val) =>
           setDarkThemeSettings({
             darkColorsAmount,
@@ -55,6 +57,7 @@ export default function DarkThemeSettingSection() {
             darkness,
           })
         }
+        symbol="°"
       />
       <ThemeSettingSlider
         label="Dark colors saturation"
@@ -67,6 +70,8 @@ export default function DarkThemeSettingSection() {
             darkness,
           })
         }
+        min={-100}
+        max={100}
       />
     </div>
   );

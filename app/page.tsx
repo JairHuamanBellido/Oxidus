@@ -9,6 +9,8 @@ import { HexInput } from "@/app/components/HexInput";
 import { RGBSliders } from "@/app/components/RGBSliders";
 import DarkThemeSettingSection from "./components/DarkThemeSettingSection";
 import LightThemeSettingSection from "./components/LightThemeSettingSection";
+import BlockColor from "./components/BlockColor";
+import HorizontalPaletteColors from "./components/HorizontalPaletteColors";
 
 export default function Home() {
   return (
@@ -31,9 +33,9 @@ function PageContent() {
 
       <RGBSliders />
 
-      <div className={"w-24 h-24"} style={{ backgroundColor: hex }}></div>
       <DarkThemeSettingSection />
       <LightThemeSettingSection />
+      <HorizontalPaletteColors />
     </main>
   );
 }

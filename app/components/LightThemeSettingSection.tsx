@@ -55,6 +55,9 @@ export default function LightThemeSettingSection() {
             lightness,
           })
         }
+        min={-360}
+        max={360}
+        symbol="°"
       />
       <ThemeSettingSlider
         label="Light colors saturation"
@@ -67,6 +70,8 @@ export default function LightThemeSettingSection() {
             lightness,
           })
         }
+        min={-100}
+        max={100}
       />
     </div>
   );

@@ -1,17 +1,18 @@
 import Color from "color";
 
+type MixColor = "black" | "white";
 export const errorColor = "transparent";
 
 export const getColorsList = (
   colorsAmount: number,
   colorsShiftAmount: number,
-  mixColor: string,
+  mixColor: MixColor,
   hueAngle: number,
   saturation: number,
-  mainColor: string,
+  hexColor: string,
 ) => {
   const colorsList = [];
-  const givenColor = mainColor;
+  const givenColor = hexColor;
 
   let step;
   for (step = 0; step < colorsAmount; step++) {
@@ -27,5 +28,5 @@ export const getColorsList = (
     );
   }
 
-  return colorsList;
+  return mixColor === "black" ? colorsList.reverse() : colorsList;
 };

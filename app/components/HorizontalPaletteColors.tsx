@@ -1,6 +1,4 @@
 import { useThemeContext } from "@/components/contexts/ThemeContext/ThemeContext";
-import { getColorsList } from "@/src/utils/getColorsList";
-import { useEffect, useState } from "react";
 import BlockColor from "./BlockColor";
 
 export default function HorizontalPaletteColors() {

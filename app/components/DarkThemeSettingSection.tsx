@@ -1,5 +1,5 @@
 import { useThemeContext } from "@/components/contexts/ThemeContext/ThemeContext";
-import { Input } from "@/components/ui/input";
+import { Input } from "@/app/components/input";
 import { Label } from "@/components/ui/label";
 import ThemeSettingSlider from "./ThemeSettingSlider";
 

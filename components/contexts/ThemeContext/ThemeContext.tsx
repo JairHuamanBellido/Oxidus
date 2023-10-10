@@ -88,7 +88,7 @@ export function ThemeContextProvider({ children }: { children: ReactNode }) {
     getThemeVariablesDefaultValues(),
   );
 
-  function updatePaletteThemes() {
+  function updatePaletteThemes(mainColor: string = variables.hex) {
     return {
       lightColors: getColorsList(
         variables.lightColorsAmount,
@@ -96,7 +96,7 @@ export function ThemeContextProvider({ children }: { children: ReactNode }) {
         "white",
         variables.lightColorsHueAngle,
         variables.lightColorsSaturation,
-        variables.hex,
+        mainColor,
       ),
       darkColors: getColorsList(
         variables.darkColorsAmount,
@@ -104,7 +104,7 @@ export function ThemeContextProvider({ children }: { children: ReactNode }) {
         "black",
         variables.darkColorsHueAngle,
         variables.darkColorsSaturation,
-        variables.hex,
+        mainColor,
       ),
     };
   }
@@ -119,7 +119,7 @@ export function ThemeContextProvider({ children }: { children: ReactNode }) {
       r: obj.red(),
       g: obj.green(),
       b: obj.blue(),
-      ...updatePaletteThemes(),
+      ...updatePaletteThemes(obj.hex()),
     });
   }
 
@@ -133,7 +133,7 @@ export function ThemeContextProvider({ children }: { children: ReactNode }) {
       r,
       g,
       b,
-      ...updatePaletteThemes(),
+      ...updatePaletteThemes(obj.hex()),
     });
   }
 
@@ -147,7 +147,7 @@ export function ThemeContextProvider({ children }: { children: ReactNode }) {
       r: obj.red(),
       g: obj.green(),
       b: obj.blue(),
-      ...updatePaletteThemes(),
+      ...updatePaletteThemes(hex),
     });
   }
 

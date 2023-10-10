@@ -1,7 +1,7 @@
 import { useThemeContext } from "@/components/contexts/ThemeContext/ThemeContext";
 import { useEffect, useState } from "react";
 import { isHexColor } from "@/lib/colors";
-import { Input } from "@/components/ui/input";
+import { Input } from "@/app/components/input";
 
 export function HexInput() {
   const { hex, setHex } = useThemeContext();

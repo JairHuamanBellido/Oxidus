@@ -24,7 +24,7 @@ export const getColorsList = (
           Color(mixColor),
           ((colorsShiftAmount / 100) * (step + 1)) / colorsAmount,
         )
-        .string(),
+        .hex(),
     );
   }
 

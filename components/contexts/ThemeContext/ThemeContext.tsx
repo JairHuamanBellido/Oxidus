@@ -1,9 +1,35 @@
 "use client";
 
-import { createContext, ReactNode, useContext, useState } from "react";
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import Color from "color";
 import { getColorsList } from "@/src/utils/getColorsList";
+import { generateShadcnColorAttributes } from "@/src/utils/generateShadcnColorAttributes";
 
+export interface ShadcnVariables {
+  background: string;
+  foreground: string;
+  primary: string;
+  primaryForeground: string;
+  card: string;
+  cardForeground: string;
+  popover: string;
+  popoverForeground: string;
+  secondary: string;
+  secondaryForeground: string;
+  muted: string;
+  mutedForeground: string;
+  accent: string;
+  accentForeground: string;
+  border: string;
+  input: string;
+  ring: string;
+}
 export type ThemeVariables = {
   mainColor: number;
   hex: string;
@@ -20,6 +46,12 @@ export type ThemeVariables = {
   lightColorsSaturation: number;
   darkColors: string[];
   lightColors: string[];
+  cssVariables: {
+    shadcn: {
+      light: ShadcnVariables;
+      dark: ShadcnVariables;
+    };
+  };
 };
 
 export type ThemeContextType = ThemeVariables & {
@@ -48,27 +80,37 @@ export type ThemeContextType = ThemeVariables & {
   setLightColors: (colors: string[]) => void;
 };
 
-const DEFAULT_COLOR = 0x1d9a6c;
+const DEFAULT_COLOR = 0x0802a3;
 
 function getThemeVariablesDefaultValues(): ThemeVariables {
   const color = Color(DEFAULT_COLOR);
+  const darkColors = getColorsList(5, 96, "black", 0, 0, color.hex()).map(
+    (color) => Color(color).hex(),
+  );
+  const lightColors = getColorsList(5, 96, "white", 0, 0, color.hex()).map(
+    (color) => Color(color).hex(),
+  );
 
+  const hex = color.hex();
   return {
     mainColor: DEFAULT_COLOR,
-    hex: color.hex(),
+    hex,
     r: color.red(),
     g: color.green(),
     b: color.blue(),
     darkColorsAmount: 5,
-    darkness: 90,
+    darkness: 96,
     darkColorsHueAngle: 0,
     darkColorsSaturation: 0,
     lightColorsAmount: 5,
-    lightness: 90,
+    lightness: 96,
     lightColorsHueAngle: 0,
     lightColorsSaturation: 0,
-    darkColors: getColorsList(5, 90, "black", 0, 0, color.hex()),
-    lightColors: getColorsList(5, 90, "white", 0, 0, color.hex()),
+    darkColors,
+    lightColors,
+    cssVariables: {
+      shadcn: generateShadcnColorAttributes({ hex, darkColors, lightColors }),
+    },
   };
 }
 
@@ -87,6 +129,17 @@ export function ThemeContextProvider({ children }: { children: ReactNode }) {
   const [variables, setVariables] = useState<ThemeVariables>(() =>
     getThemeVariablesDefaultValues(),
   );
+
+  useEffect(() => {
+    const { hex, lightColors, darkColors } = variables;
+
+    setVariables({
+      ...variables,
+      cssVariables: {
+        shadcn: generateShadcnColorAttributes({ hex, darkColors, lightColors }),
+      },
+    });
+  }, [variables.hex, variables.lightColors, variables.darkColors]);
 
   function updatePaletteThemes(mainColor: string = variables.hex) {
     return {
@@ -248,7 +301,7 @@ export function ThemeContextDebugger() {
   const { setMainColor, setRGB, setHex, ...vars } = useThemeContext();
 
   return (
-    <div className={"fixed bottom-0 right-0 p-4"}>
+    <div className={"fixed bottom-0 max-h-[400px] overflow-auto right-0 p-4"}>
       <pre>{JSON.stringify(vars, null, 2)}</pre>
     </div>
   );

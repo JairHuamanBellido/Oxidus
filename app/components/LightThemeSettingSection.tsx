@@ -14,7 +14,7 @@ export default function LightThemeSettingSection() {
 
   return (
     <div className="flex space-x-4">
-      <div className="flex flex-col">
+      <div className="flex flex-col w-24">
         <Label>Light colors amount</Label>
         <Input
           type="number"

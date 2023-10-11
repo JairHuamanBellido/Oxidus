@@ -19,12 +19,18 @@ export default function Home() {
 function PageContent() {
   return (
     <main className={`min-h-screen p-8 flex flex-col gap-6`}>
-      <HexInput />
+      <div className="flex">
+        <div>
+          <HexInput />
 
-      <RGBSliders />
+          <RGBSliders />
+        </div>
+        <div>
+          <DarkThemeSettingSection />
+          <LightThemeSettingSection />
+        </div>
+      </div>
 
-      <DarkThemeSettingSection />
-      <LightThemeSettingSection />
       <HorizontalPaletteColors />
       <CustomTheme />
     </main>

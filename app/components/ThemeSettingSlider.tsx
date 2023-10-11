@@ -26,7 +26,6 @@ export default function ThemeSettingSlider({
       </h2>
       <div>
         <Slider
-          trackClassName={"h-1"}
           defaultValue={[value]}
           value={[value]}
           step={1}

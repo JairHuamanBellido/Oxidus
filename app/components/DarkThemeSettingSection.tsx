@@ -14,7 +14,7 @@ export default function DarkThemeSettingSection() {
 
   return (
     <div className="flex space-x-4">
-      <div className="flex flex-col">
+      <div className="flex flex-col w-24">
         <Label>Dark colors amount</Label>
         <Input
           type="number"

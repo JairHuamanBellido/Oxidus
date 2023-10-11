@@ -24,7 +24,6 @@ export function RGBSliders() {
         <span className={"inline-block w-36"}>R ({r})</span>
 
         <Slider
-          trackClassName={"h-1"}
           defaultValue={[r]}
           value={[r]}
           step={1}
@@ -36,7 +35,6 @@ export function RGBSliders() {
       <div className={"flex flex-row flex-nowrap items-center"}>
         <span className={"inline-block w-36"}>G ({g})</span>
         <Slider
-          trackClassName={"h-1"}
           defaultValue={[g]}
           value={[g]}
           step={1}
@@ -48,7 +46,6 @@ export function RGBSliders() {
       <div className={"flex flex-row flex-nowrap items-center"}>
         <span className={"inline-block w-36"}>B ({b})</span>
         <Slider
-          trackClassName={"h-1"}
           defaultValue={[b]}
           value={[b]}
           step={1}

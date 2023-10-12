@@ -1,38 +1,47 @@
 "use client";
 
 import { ThemeContextProvider } from "@/components/contexts/ThemeContext/ThemeContext";
-import { HexInput } from "@/app/components/HexInput";
-import { RGBSliders } from "@/app/components/RGBSliders";
-import DarkThemeSettingSection from "./components/DarkThemeSettingSection";
-import LightThemeSettingSection from "./components/LightThemeSettingSection";
-import HorizontalPaletteColors from "./components/HorizontalPaletteColors";
-import CustomTheme from "./components/CustomTheme";
+
+import Sidebar from "./components/Sidebar";
+import Header from "./components/Header";
+import ThemeModifier from "./components/ThemeModifier";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import TypographyMuted from "./components/typography/muted";
+import Link from "next/link";
 
 export default function Home() {
   return (
     <ThemeContextProvider>
-      <PageContent />
+      <main className="flex">
+        <ThemeModifier />
+        <Sidebar />
+        <div className="w-[calc(100vw-260px)] h-screen relative">
+          <Header />
+          <div className="flex w-full h-[calc(100vw-80px)] items-center justify-center">
+            <div className="w-[600px] space-y-4">
+              <div className="space-y-1 ">
+                <Label>Username</Label>
+                <Input placeholder="Type your username" />
+              </div>
+              <div className="space-y-1 ">
+                <Label>Password</Label>
+                <Input placeholder="Type your password" type="password" />
+              </div>
+              <div className="flex flex-col space-y-2">
+                <Button>Sign In</Button>
+                <TypographyMuted>
+                  Don't have an account?{" "}
+                  <Button asChild variant={"link"}>
+                    <Link href={"/"}> Sign Up</Link>
+                  </Button>
+                </TypographyMuted>{" "}
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
     </ThemeContextProvider>
-  );
-}
-
-function PageContent() {
-  return (
-    <main className={`min-h-screen p-8 flex flex-col gap-6`}>
-      <div className="flex">
-        <div>
-          <HexInput />
-
-          <RGBSliders />
-        </div>
-        <div>
-          <DarkThemeSettingSection />
-          <LightThemeSettingSection />
-        </div>
-      </div>
-
-      <HorizontalPaletteColors />
-      <CustomTheme />
-    </main>
   );
 }

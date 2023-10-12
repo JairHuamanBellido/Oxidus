@@ -1,5 +1,6 @@
-import { Label } from "@/components/ui/label";
 import { Slider } from "@/components/ui/slider";
+import TypographyMuted from "./typography/muted";
+import TypographyParagraph from "./typography/paragraph";
 
 interface Props {
   label: string;
@@ -19,21 +20,20 @@ export default function ThemeSettingSlider({
   symbol = "%",
 }: Props) {
   return (
-    <div className="flex flex-col w-[160px]">
-      <Label className="h-8">{label}</Label>
-      <h2 className="text-3xl mt-2 mb-4">
+    <div className="flex justify-between">
+      <TypographyMuted className="w-[150px] mr-4">{label}</TypographyMuted>
+
+      <Slider
+        defaultValue={[value]}
+        value={[value]}
+        step={1}
+        min={min}
+        max={max}
+        onValueChange={(g) => onValueChange(g[0])}
+      />
+      <TypographyParagraph className="flex ml-2 w-[100px]">
         {value} <span className="opacity-60">{symbol}</span>
-      </h2>
-      <div>
-        <Slider
-          defaultValue={[value]}
-          value={[value]}
-          step={1}
-          min={min}
-          max={max}
-          onValueChange={(g) => onValueChange(g[0])}
-        />
-      </div>
+      </TypographyParagraph>
     </div>
   );
 }

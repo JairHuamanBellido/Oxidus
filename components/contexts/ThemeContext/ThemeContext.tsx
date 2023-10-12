@@ -52,6 +52,7 @@ export type ThemeVariables = {
       dark: ShadcnVariables;
     };
   };
+  theme: "dark" | "light";
 };
 
 export type ThemeContextType = ThemeVariables & {
@@ -76,8 +77,7 @@ export type ThemeContextType = ThemeVariables & {
       | "lightColorsSaturation"
     >,
   ) => void;
-  setDarkColors: (colors: string[]) => void;
-  setLightColors: (colors: string[]) => void;
+  setTheme: (theme: "dark" | "light") => void;
 };
 
 const DEFAULT_COLOR = 0x0802a3;
@@ -94,6 +94,7 @@ function getThemeVariablesDefaultValues(): ThemeVariables {
   const hex = color.hex();
   return {
     mainColor: DEFAULT_COLOR,
+    theme: "light",
     hex,
     r: color.red(),
     g: color.green(),
@@ -121,8 +122,7 @@ const ThemeContext = createContext<ThemeContextType>({
   setHex: () => {},
   setDarkThemeSettings: () => {},
   setLightThemeSettings: () => {},
-  setDarkColors: () => {},
-  setLightColors: () => {},
+  setTheme: () => {},
 });
 
 export function ThemeContextProvider({ children }: { children: ReactNode }) {
@@ -269,11 +269,8 @@ export function ThemeContextProvider({ children }: { children: ReactNode }) {
     });
   }
 
-  function setDarkColors(colors: string[]) {
-    setDarkColors(colors);
-  }
-  function setLightColors(colors: string[]) {
-    setDarkColors(colors);
+  function setTheme(theme: "dark" | "light") {
+    setVariables({ ...variables, theme });
   }
   return (
     <ThemeContext.Provider
@@ -284,8 +281,7 @@ export function ThemeContextProvider({ children }: { children: ReactNode }) {
         setHex,
         setDarkThemeSettings,
         setLightThemeSettings,
-        setDarkColors,
-        setLightColors,
+        setTheme,
       }}
     >
       {children}

@@ -19,7 +19,7 @@ export function RGBSliders() {
   }
 
   return (
-    <div className={"flex flex-col gap-2 w-48"}>
+    <div className={"flex flex-col gap-2"}>
       <div className={"flex flex-row flex-nowrap items-center"}>
         <span className={"inline-block w-36"}>R ({r})</span>
 

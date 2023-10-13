@@ -22,7 +22,7 @@ export default function Sidebar() {
     setDarkThemeSettings,
   } = useThemeContext();
   return (
-    <div className="w-[260px] overflow-y-auto space-y-4 p-4 h-screen border-r-[1px] border-r-border">
+    <div className="w-[300px] overflow-y-auto space-y-4 p-4 h-screen border-r-[1px] border-r-border">
       <SidebarThemeBlock>
         <TypographyMuted>Hex</TypographyMuted>
         <HexInput />

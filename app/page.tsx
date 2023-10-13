@@ -10,6 +10,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import TypographyMuted from "./components/typography/muted";
 import Link from "next/link";
+import ThemeVariablesSettingSidebar from "./components/ThemeVariablesSettingSidebar";
 
 export default function Home() {
   return (
@@ -17,9 +18,9 @@ export default function Home() {
       <main className="flex">
         <ThemeModifier />
         <Sidebar />
-        <div className="w-[calc(100vw-260px)] h-screen relative">
+        <div className="w-[calc(100vw-600px)] h-screen relative">
           <Header />
-          <div className="flex w-full h-[calc(100vw-80px)] items-center justify-center">
+          <div className="flex w-full h-[calc(100vh-80px)] items-center justify-center">
             <div className="w-[600px] space-y-4">
               <div className="space-y-1 ">
                 <Label>Username</Label>
@@ -31,6 +32,7 @@ export default function Home() {
               </div>
               <div className="flex flex-col space-y-2">
                 <Button>Sign In</Button>
+                <Button variant={"secondary"}>Secondary</Button>
                 <TypographyMuted>
                   Don't have an account?{" "}
                   <Button asChild variant={"link"}>
@@ -41,6 +43,7 @@ export default function Home() {
             </div>
           </div>
         </div>
+        <ThemeVariablesSettingSidebar />
       </main>
     </ThemeContextProvider>
   );

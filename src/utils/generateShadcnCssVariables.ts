@@ -3,35 +3,34 @@ import { extractHSLValues } from "./getHSLValues";
 
 export function generateShadcnCssVariables(theme: ShadcnVariables) {
   return `
---background: ${extractHSLValues(theme.background)};
---foreground: ${extractHSLValues(theme.foreground)};
+--background: ${extractHSLValues(theme.background.color)};
+--foreground: ${extractHSLValues(theme.foreground.color)};
 
---primary: ${extractHSLValues(theme.primary)};
---primary-foreground: ${extractHSLValues(theme.primaryForeground)};
+--primary: ${extractHSLValues(theme.primary.color)};
+--primary-foreground: ${extractHSLValues(theme.primaryForeground.color)};
 
---card: ${extractHSLValues(theme.card)};
---card-foreground: ${extractHSLValues(theme.cardForeground)};
+--card: ${extractHSLValues(theme.card.color)};
+--card-foreground: ${extractHSLValues(theme.cardForeground.color)};
 
---popover: ${extractHSLValues(theme.popover)};
---popover-foreground: ${extractHSLValues(theme.popoverForeground)};
+--popover: ${extractHSLValues(theme.popover.color)};
+--popover-foreground: ${extractHSLValues(theme.popoverForeground.color)};
 
---secondary: ${extractHSLValues(theme.secondary)};
---secondary-foreground: ${extractHSLValues(theme.secondaryForeground)};
+--secondary: ${extractHSLValues(theme.secondary.color)};
+--secondary-foreground: ${extractHSLValues(theme.secondaryForeground.color)};
 
---muted: ${extractHSLValues(theme.muted)};
---muted-foreground: ${extractHSLValues(theme.mutedForeground)};
+--muted: ${extractHSLValues(theme.muted.color)};
+--muted-foreground: ${extractHSLValues(theme.mutedForeground.color)};
  
---accent: ${extractHSLValues(theme.accent)};
---accent-foreground: ${extractHSLValues(theme.accentForeground)};
+--accent: ${extractHSLValues(theme.accent.color)};
+--accent-foreground: ${extractHSLValues(theme.accentForeground.color)};
 
 --destructive: 0 84.2% 60.2%;
 --destructive-foreground: 210 40% 98%;
 
---border: ${extractHSLValues(theme.border)};
---input: ${extractHSLValues(theme.input)};
---ring: ${extractHSLValues(theme.ring)};
+--border: ${extractHSLValues(theme.border.color)};
+--input: ${extractHSLValues(theme.input.color)};
+--ring: ${extractHSLValues(theme.ring.color)};
 
 --radius: 0.5rem;
-    
     `;
 }

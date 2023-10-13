@@ -11,25 +11,30 @@ import Color from "color";
 import { getColorsList } from "@/src/utils/getColorsList";
 import { generateShadcnColorAttributes } from "@/src/utils/generateShadcnColorAttributes";
 
-export interface ShadcnVariables {
-  background: string;
-  foreground: string;
-  primary: string;
-  primaryForeground: string;
-  card: string;
-  cardForeground: string;
-  popover: string;
-  popoverForeground: string;
-  secondary: string;
-  secondaryForeground: string;
-  muted: string;
-  mutedForeground: string;
-  accent: string;
-  accentForeground: string;
-  border: string;
-  input: string;
-  ring: string;
+export interface ColorState {
+  color: string;
+  isLocked?: boolean;
 }
+export interface ShadcnVariables {
+  background: ColorState;
+  foreground: ColorState;
+  primary: ColorState;
+  primaryForeground: ColorState;
+  card: ColorState;
+  cardForeground: ColorState;
+  popover: ColorState;
+  popoverForeground: ColorState;
+  secondary: ColorState;
+  secondaryForeground: ColorState;
+  muted: ColorState;
+  mutedForeground: ColorState;
+  accent: ColorState;
+  accentForeground: ColorState;
+  border: ColorState;
+  input: ColorState;
+  ring: ColorState;
+}
+
 export type ThemeVariables = {
   mainColor: number;
   hex: string;
@@ -78,6 +83,7 @@ export type ThemeContextType = ThemeVariables & {
     >,
   ) => void;
   setTheme: (theme: "dark" | "light") => void;
+  setCssVariables: (cssVariables: ThemeVariables["cssVariables"]) => void;
 };
 
 const DEFAULT_COLOR = 0x0802a3;
@@ -123,6 +129,7 @@ const ThemeContext = createContext<ThemeContextType>({
   setDarkThemeSettings: () => {},
   setLightThemeSettings: () => {},
   setTheme: () => {},
+  setCssVariables: () => {},
 });
 
 export function ThemeContextProvider({ children }: { children: ReactNode }) {
@@ -131,12 +138,17 @@ export function ThemeContextProvider({ children }: { children: ReactNode }) {
   );
 
   useEffect(() => {
-    const { hex, lightColors, darkColors } = variables;
+    const { hex, lightColors, darkColors, cssVariables } = variables;
 
     setVariables({
       ...variables,
       cssVariables: {
-        shadcn: generateShadcnColorAttributes({ hex, darkColors, lightColors }),
+        shadcn: generateShadcnColorAttributes({
+          hex,
+          darkColors,
+          lightColors,
+          shadcnVariables: cssVariables,
+        }),
       },
     });
   }, [variables.hex, variables.lightColors, variables.darkColors]);
@@ -272,6 +284,11 @@ export function ThemeContextProvider({ children }: { children: ReactNode }) {
   function setTheme(theme: "dark" | "light") {
     setVariables({ ...variables, theme });
   }
+
+  function setCssVariables(cssVariables: ThemeVariables["cssVariables"]) {
+    setVariables({ ...variables, cssVariables });
+  }
+
   return (
     <ThemeContext.Provider
       value={{
@@ -282,6 +299,7 @@ export function ThemeContextProvider({ children }: { children: ReactNode }) {
         setDarkThemeSettings,
         setLightThemeSettings,
         setTheme,
+        setCssVariables,
       }}
     >
       {children}

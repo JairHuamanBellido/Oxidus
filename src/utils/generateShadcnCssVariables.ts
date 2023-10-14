@@ -1,4 +1,4 @@
-import { ShadcnVariables } from "@/components/contexts/ThemeContext/ThemeContext";
+import { ShadcnVariables } from "@/src/contexts/ThemeContext/ThemeContext";
 import { extractHSLValues } from "./getHSLValues";
 
 export function generateShadcnCssVariables(theme: ShadcnVariables) {

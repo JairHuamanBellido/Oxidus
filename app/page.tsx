@@ -1,16 +1,16 @@
 "use client";
 
-import { ThemeContextProvider } from "@/components/contexts/ThemeContext/ThemeContext";
+import { ThemeContextProvider } from "@/src/contexts/ThemeContext/ThemeContext";
 
-import Sidebar from "./components/Sidebar";
-import Header from "./components/Header";
-import ThemeModifier from "./components/ThemeModifier";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import TypographyMuted from "./components/typography/muted";
+import Sidebar from "../src/components/sidebar/Sidebar";
+import Header from "../src/components/header";
+import ThemeModifier from "../src/components/theme/ThemeModifier";
+import { Label } from "@/src/components/shadcn/label";
+import { Input } from "@/src/components/shadcn/input";
+import { Button } from "@/src/components/shadcn/button";
+import TypographyMuted from "../src/components/typography/muted";
 import Link from "next/link";
-import ThemeVariablesSettingSidebar from "./components/ThemeVariablesSettingSidebar";
+import ThemeVariablesSettingSidebar from "../src/components/sidebar/ThemeVariablesSettingSidebar";
 
 export default function Home() {
   return (

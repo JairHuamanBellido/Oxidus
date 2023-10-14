@@ -1,7 +1,7 @@
 import {
   ShadcnVariables,
   ThemeVariables,
-} from "@/components/contexts/ThemeContext/ThemeContext";
+} from "@/src/contexts/ThemeContext/ThemeContext";
 import Color from "color";
 
 const setColorBasedOnIsLocked = (

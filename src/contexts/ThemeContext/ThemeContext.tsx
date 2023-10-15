@@ -57,7 +57,7 @@ export type ThemeVariables = {
       dark: ShadcnVariables;
     };
   };
-  theme: "dark" | "light";
+  mode: "dark" | "light";
 };
 
 export type ThemeContextType = ThemeVariables & {
@@ -82,8 +82,9 @@ export type ThemeContextType = ThemeVariables & {
       | "lightColorsSaturation"
     >,
   ) => void;
-  setTheme: (theme: "dark" | "light") => void;
+  setMode: (mode: "dark" | "light") => void;
   setCssVariables: (cssVariables: ThemeVariables["cssVariables"]) => void;
+  setTheme: (theme: ThemeVariables) => void;
 };
 
 const DEFAULT_COLOR = 0x0802a3;
@@ -100,7 +101,7 @@ function getThemeVariablesDefaultValues(): ThemeVariables {
   const hex = color.hex();
   return {
     mainColor: DEFAULT_COLOR,
-    theme: "light",
+    mode: "light",
     hex,
     r: color.red(),
     g: color.green(),
@@ -128,8 +129,9 @@ const ThemeContext = createContext<ThemeContextType>({
   setHex: () => {},
   setDarkThemeSettings: () => {},
   setLightThemeSettings: () => {},
-  setTheme: () => {},
+  setMode: () => {},
   setCssVariables: () => {},
+  setTheme: () => {},
 });
 
 export function ThemeContextProvider({ children }: { children: ReactNode }) {
@@ -172,6 +174,10 @@ export function ThemeContextProvider({ children }: { children: ReactNode }) {
         mainColor,
       ),
     };
+  }
+
+  function setTheme(theme: ThemeVariables) {
+    setVariables(theme);
   }
 
   function setMainColor(color: number) {
@@ -281,8 +287,8 @@ export function ThemeContextProvider({ children }: { children: ReactNode }) {
     });
   }
 
-  function setTheme(theme: "dark" | "light") {
-    setVariables({ ...variables, theme });
+  function setMode(mode: "dark" | "light") {
+    setVariables({ ...variables, mode });
   }
 
   function setCssVariables(cssVariables: ThemeVariables["cssVariables"]) {
@@ -298,8 +304,9 @@ export function ThemeContextProvider({ children }: { children: ReactNode }) {
         setHex,
         setDarkThemeSettings,
         setLightThemeSettings,
-        setTheme,
+        setMode,
         setCssVariables,
+        setTheme,
       }}
     >
       {children}

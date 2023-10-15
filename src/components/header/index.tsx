@@ -2,6 +2,8 @@ import { Separator } from "@/src/components/shadcn/separator";
 import HorizontalPaletteColors from "./HorizontalPaletteColors";
 import ButtonShowCode from "./ButtonShowCode";
 import ThemeToggle from "./ThemeToggle";
+import ThemeExport from "../theme/ThemeExport";
+import ThemeImport from "../theme/ThemeImport";
 
 export default function Header() {
   return (
@@ -9,6 +11,8 @@ export default function Header() {
       <HorizontalPaletteColors />
       <Separator orientation="vertical" />
       <ButtonShowCode />
+      <ThemeExport />
+      <ThemeImport />
       <ThemeToggle />
     </header>
   );

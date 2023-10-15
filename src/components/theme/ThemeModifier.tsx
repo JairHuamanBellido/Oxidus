@@ -8,11 +8,11 @@ export default function ThemeModifier() {
       shadcn: { light, dark },
     },
     hex,
-    theme,
+    mode,
   } = useThemeContext();
 
   useEffect(() => {
-    const themeSelected = theme === "dark" ? dark : light;
+    const themeSelected = mode === "dark" ? dark : light;
     document.body.style.setProperty(
       "--background",
       extractHSLValues(themeSelected.background.color),
@@ -91,6 +91,6 @@ export default function ThemeModifier() {
       "--ring",
       extractHSLValues(themeSelected.ring.color),
     );
-  }, [hex, light, dark, theme]);
+  }, [hex, light, dark, mode]);
   return <></>;
 }

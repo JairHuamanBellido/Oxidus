@@ -10,7 +10,7 @@ import { cn } from "@/src/utils/utils";
 import { MoonIcon, SunIcon } from "lucide-react";
 
 export default function ThemeToggle() {
-  const { setTheme, theme } = useThemeContext();
+  const { setMode, mode } = useThemeContext();
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -18,25 +18,25 @@ export default function ThemeToggle() {
           <SunIcon
             className={cn(
               "h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all ",
-              { "-rotate-90": theme === "dark" },
-              { "scale-0": theme === "dark" },
+              { "-rotate-90": mode === "dark" },
+              { "scale-0": mode === "dark" },
             )}
           />
           <MoonIcon
             className={cn(
               "absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100",
-              { "rotate-0": theme === "dark" },
-              { "scale-100": theme === "dark" },
+              { "rotate-0": mode === "dark" },
+              { "scale-100": mode === "dark" },
             )}
           />
           <span className="sr-only">Toggle theme</span>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => setTheme("light")}>
+        <DropdownMenuItem onClick={() => setMode("light")}>
           Light
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("dark")}>
+        <DropdownMenuItem onClick={() => setMode("dark")}>
           Dark
         </DropdownMenuItem>
       </DropdownMenuContent>

@@ -141,7 +141,7 @@ export function generateShadcnColorAttributes({
       },
       accent: {
         color: setColorBasedOnIsLocked(
-          Color(hex).mix(Color("white"), 0.95).hex(),
+          Color(hex).mix(Color("white"), 0.90).hex(),
           "light",
           "accent",
           shadcnVariables,

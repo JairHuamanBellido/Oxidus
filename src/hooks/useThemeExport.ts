@@ -27,6 +27,8 @@ export default function useThemeExport() {
     a.download = "theme.json";
     a.click();
 
+    (window as any).gtag("event", "download-theme");
+
     window.URL.revokeObjectURL(url);
   };
 

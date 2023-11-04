@@ -10,7 +10,7 @@ export default function ShowCase() {
       <TabsList>
         <TabsTrigger value="auth">Authentication</TabsTrigger>
         <TabsTrigger value="cards">Cards</TabsTrigger>
-        <TabsTrigger value="settings">Setttings</TabsTrigger>
+        <TabsTrigger value="settings">Settings</TabsTrigger>
       </TabsList>
       <TabsContent className="w-full h-full relative" value="auth">
         <AuthenticationShowcase />

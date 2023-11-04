@@ -10,6 +10,7 @@ export default function ThemeImport() {
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files ? e.target.files[0] : null;
     submit(file, e);
+    (window as any).gtag("event", "import-theme");
   };
   return (
     <div className="flex items-center">

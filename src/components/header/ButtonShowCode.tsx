@@ -8,7 +8,12 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/src/components/shadcn/dialog";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/src/components/shadcn/tabs";
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "@/src/components/shadcn/tabs";
 import { generateShadcnCssVariables } from "@/src/utils/generateShadcnCssVariables";
 import SyntaxHighlighter from "react-syntax-highlighter/dist/esm/default-highlight";
 
@@ -23,7 +28,14 @@ export default function ButtonShowCode() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline">Show code</Button>
+        <Button
+          onClick={() => {
+            (window as any).gtag("event", "show-css-code");
+          }}
+          variant="outline"
+        >
+          Show code
+        </Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
@@ -34,10 +46,24 @@ export default function ButtonShowCode() {
           </DialogDescription>
         </DialogHeader>
         <div className="grid gap-4 py-4">
-          <Tabs defaultValue="light-code" >
+          <Tabs defaultValue="light-code">
             <TabsList>
-              <TabsTrigger value="light-code">Light</TabsTrigger>
-              <TabsTrigger value="dark-code">Dark</TabsTrigger>
+              <TabsTrigger
+                onClick={() => {
+                  (window as any).gtag("event", "show-css-code-light");
+                }}
+                value="light-code"
+              >
+                Light
+              </TabsTrigger>
+              <TabsTrigger
+                onClick={() => {
+                  (window as any).gtag("event", "show-css-code-dark");
+                }}
+                value="dark-code"
+              >
+                Dark
+              </TabsTrigger>
             </TabsList>
             <TabsContent value="light-code">
               <SyntaxHighlighter

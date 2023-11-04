@@ -11,6 +11,7 @@ import { MoonIcon, SunIcon } from "lucide-react";
 
 export default function ThemeToggle() {
   const { setMode, mode } = useThemeContext();
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -33,10 +34,20 @@ export default function ThemeToggle() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => setMode("light")}>
+        <DropdownMenuItem
+          onClick={() => {
+            setMode("light");
+            (window as any).gtag("event", "light-mode");
+          }}
+        >
           Light
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setMode("dark")}>
+        <DropdownMenuItem
+          onClick={() => {
+            setMode("dark");
+            (window as any).gtag("event", "dark-mode");
+          }}
+        >
           Dark
         </DropdownMenuItem>
       </DropdownMenuContent>

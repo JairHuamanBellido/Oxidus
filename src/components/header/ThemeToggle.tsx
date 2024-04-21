@@ -17,7 +17,7 @@ export default function ThemeToggle() {
         className={cn(
           buttonVariants({
             variant: "ghost",
-            className: "w-9 px-0",
+            className: "w-9 px-0 hover:bg-transition",
           }),
         )}
       >

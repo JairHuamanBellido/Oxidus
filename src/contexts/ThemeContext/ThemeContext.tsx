@@ -87,31 +87,31 @@ export type ThemeContextType = ThemeVariables & {
   setTheme: (theme: ThemeVariables) => void;
 };
 
-const DEFAULT_COLOR = 0x0802a3;
+const DEFAULT_COLOR = Color("#1350f4").rgbNumber()
 
 function getThemeVariablesDefaultValues(): ThemeVariables {
   const color = Color(DEFAULT_COLOR);
-  const darkColors = getColorsList(5, 96, "black", 0, 0, color.hex()).map(
+  const darkColors = getColorsList(5, 100, "black", 0, 0, color.hex()).map(
     (color) => Color(color).hex(),
   );
-  const lightColors = getColorsList(5, 96, "white", 0, 0, color.hex()).map(
+  const lightColors = getColorsList(5, 100, "white", 0, 0, color.hex()).map(
     (color) => Color(color).hex(),
   );
 
   const hex = color.hex();
   return {
     mainColor: DEFAULT_COLOR,
-    mode: "light",
+    mode: "dark",
     hex,
     r: color.red(),
     g: color.green(),
     b: color.blue(),
     darkColorsAmount: 5,
-    darkness: 96,
+    darkness: 100,
     darkColorsHueAngle: 0,
     darkColorsSaturation: 0,
     lightColorsAmount: 5,
-    lightness: 96,
+    lightness: 100,
     lightColorsHueAngle: 0,
     lightColorsSaturation: 0,
     darkColors,

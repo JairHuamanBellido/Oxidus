@@ -11,6 +11,8 @@ import {
 } from "@/src/components/shadcn/popover";
 import { ColorPicker, useColor } from "react-color-palette";
 import { useEffect } from "react";
+import { Button } from "../shadcn/button";
+import { Lock, Unlock } from "lucide-react";
 
 function SmallColorBlockRounded({ hex }: { hex: string }) {
   return <div className="w-8 h-8 rounded" style={{ background: hex }}></div>;
@@ -34,14 +36,13 @@ function CssVariablesContainer({
   ) => void;
   theme: "dark" | "light";
 }) {
-  const { lightColors, darkColors } = useThemeContext();
   const [color, setColor] = useColor(hex);
 
   useEffect(() => {
     changeCssVariables(variable, color.hex, theme);
   }, [color]);
   return (
-    <div className="h-20">
+    <div className="relative h-20 pt-4">
       <div className="flex flex-col items-center rounded space-y-2">
         <Popover>
           <PopoverTrigger>
@@ -58,7 +59,7 @@ function CssVariablesContainer({
         </Popover>
         <TypographyMuted className="capitalize">{variable}</TypographyMuted>
       </div>
-      {/* <div>
+      <div className="absolute top-0 right-0">
         <Button
           variant={"secondary"}
           className="w-fit p-1 h-fit bg-transparent"
@@ -72,7 +73,7 @@ function CssVariablesContainer({
             <Unlock className="text-secondary-foreground/40" height={16} />
           )}
         </Button>
-      </div> */}
+      </div>
     </div>
   );
 }

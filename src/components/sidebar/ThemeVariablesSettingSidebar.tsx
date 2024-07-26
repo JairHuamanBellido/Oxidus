@@ -13,9 +13,10 @@ import { ColorPicker, useColor } from "react-color-palette";
 import { useEffect } from "react";
 import { Button } from "../shadcn/button";
 import { Lock, Unlock } from "lucide-react";
+import TypographyH3 from "../typography/h3";
 
 function SmallColorBlockRounded({ hex }: { hex: string }) {
-  return <div className="w-8 h-8 rounded" style={{ background: hex }}></div>;
+  return <div className="w-4 h-4 rounded" style={{ background: hex }}></div>;
 }
 
 function CssVariablesContainer({
@@ -42,8 +43,8 @@ function CssVariablesContainer({
     changeCssVariables(variable, color.hex, theme);
   }, [color]);
   return (
-    <div className="relative h-20 pt-4">
-      <div className="flex flex-col items-center rounded space-y-2">
+    <div className="relative pt-4">
+      <div className="flex items-center rounded space-x-2">
         <Popover>
           <PopoverTrigger>
             <SmallColorBlockRounded hex={hex} />
@@ -129,7 +130,8 @@ export default function ThemeVariablesSettingSidebar() {
       }}
       className="w-[300px] overflow-y-auto p-4 h-[calc(100vh_-_80px)] relative overflow-auto "
     >
-      <div className="h-fit grid grid-cols-2 gap-4  overflow-auto">
+        <TypographyH3 className="mb-4">{mode === 'dark' ? 'Dark variables' : 'Light variables'}</TypographyH3>
+      <div className="h-fit flex flex-col space-y-2  overflow-auto">
         {mode === "light" &&
           Object.keys(light).map((e) => (
             <CssVariablesContainer

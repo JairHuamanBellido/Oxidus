@@ -33,6 +33,11 @@ export interface ShadcnVariables {
   border: ColorState;
   input: ColorState;
   ring: ColorState;
+  chart1:ColorState;
+  chart2:ColorState
+  chart3:ColorState
+  chart4:ColorState
+  chart5:ColorState
 }
 
 export type ThemeVariables = {

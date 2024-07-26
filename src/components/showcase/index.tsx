@@ -6,22 +6,21 @@ import SettingsLayout from "./layout/settings";
 
 export default function ShowCase() {
   return (
-    <Tabs defaultValue="auth" className="w-full h-full">
+    <Tabs defaultValue="cards" className="w-full h-full">
       <TabsList>
-        <TabsTrigger value="auth">Authentication</TabsTrigger>
         <TabsTrigger value="cards">Cards</TabsTrigger>
+        <TabsTrigger value="auth">Authentication</TabsTrigger>
         <TabsTrigger value="settings">Settings</TabsTrigger>
       </TabsList>
-      <TabsContent className="w-full h-full relative" value="auth">
-        <AuthenticationShowcase />
-      </TabsContent>
       <TabsContent className="w-full h-full relative" value="cards">
         <CardShowcase />
+      </TabsContent>
+      <TabsContent className="w-full h-full relative" value="auth">
+        <AuthenticationShowcase />
       </TabsContent>
       <TabsContent className="w-full h-full relative" value="settings">
         <SettingsLayout />
       </TabsContent>
-      
     </Tabs>
   );
 }

@@ -91,6 +91,26 @@ export default function ThemeModifier() {
       "--ring",
       extractHSLValues(themeSelected.ring.color),
     );
+    document.body.style.setProperty(
+      "--chart-1",
+      extractHSLValues(themeSelected.chart1.color),
+    );
+    document.body.style.setProperty(
+      "--chart-2",
+      extractHSLValues(themeSelected.chart2.color),
+    );
+    document.body.style.setProperty(
+      "--chart-3",
+      extractHSLValues(themeSelected.chart3.color),
+    );
+    document.body.style.setProperty(
+      "--chart-4",
+      extractHSLValues(themeSelected.chart4.color),
+    );
+    document.body.style.setProperty(
+      "--chart-5",
+      extractHSLValues(themeSelected.chart5.color),
+    );
   }, [hex, light, dark, mode]);
   return <></>;
 }

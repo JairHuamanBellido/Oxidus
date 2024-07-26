@@ -6,7 +6,7 @@ interface Props extends React.HTMLProps<HTMLParagraphElement> {
 }
 export default function TypographyParagraph({ children, className, ...rest }: Props) {
   return (
-    <p {...rest} className={cn("leading-7", className)}>
+    <p {...rest} className={cn( className)}>
       {children}
     </p>
   );

@@ -69,7 +69,7 @@ export function generateShadcnColorAttributes({
       },
       card: {
         color: setColorBasedOnIsLocked(
-          lightColors[lightColors.length - 1],
+          Color(hex).mix(Color("white"), 0.95).hex(),
           "light",
           "card",
           shadcnVariables,
@@ -141,7 +141,7 @@ export function generateShadcnColorAttributes({
       },
       accent: {
         color: setColorBasedOnIsLocked(
-          Color(hex).mix(Color("white"), 0.90).hex(),
+          Color(hex).mix(Color("white"), 0.9).hex(),
           "light",
           "accent",
           shadcnVariables,
@@ -159,7 +159,7 @@ export function generateShadcnColorAttributes({
       },
       border: {
         color: setColorBasedOnIsLocked(
-          Color("white").hsl().darken(0.1).hex(),
+          Color(hex).mix(Color("white"), 0.8).hex(),
           "light",
           "border",
           shadcnVariables,
@@ -178,6 +178,46 @@ export function generateShadcnColorAttributes({
       ring: {
         color: setColorBasedOnIsLocked(hex, "light", "ring", shadcnVariables),
         isLocked: shadcnVariables?.shadcn.light.ring.isLocked,
+      },
+      chart1: {
+        color: setColorBasedOnIsLocked(hex, "light", "chart1", shadcnVariables),
+        isLocked: shadcnVariables?.shadcn.light.chart1.isLocked,
+      },
+      chart2: {
+        color: setColorBasedOnIsLocked(
+          Color(hex).mix(Color("white"), 0.15).hex(),
+          "light",
+          "chart2",
+          shadcnVariables,
+        ),
+        isLocked: shadcnVariables?.shadcn.light.chart2.isLocked,
+      },
+      chart3: {
+        color: setColorBasedOnIsLocked(
+          Color(hex).mix(Color("white"), 0.35).hex(),
+          "light",
+          "chart3",
+          shadcnVariables,
+        ),
+        isLocked: shadcnVariables?.shadcn.light.chart3.isLocked,
+      },
+      chart4: {
+        color: setColorBasedOnIsLocked(
+          Color(hex).mix(Color("white"), 0.45).hex(),
+          "light",
+          "chart4",
+          shadcnVariables,
+        ),
+        isLocked: shadcnVariables?.shadcn.light.chart4.isLocked,
+      },
+      chart5: {
+        color: setColorBasedOnIsLocked(
+          Color(hex).mix(Color("white"), 0.55).hex(),
+          "light",
+          "chart5",
+          shadcnVariables,
+        ),
+        isLocked: shadcnVariables?.shadcn.light.chart5.isLocked,
       },
     },
     dark: {
@@ -214,8 +254,8 @@ export function generateShadcnColorAttributes({
       },
       card: {
         color: setColorBasedOnIsLocked(
-          darkColors[0],
-          "dark",
+          Color(hex).mix(Color("#0a0a0a"), 0.96).hex(),
+          "light",
           "card",
           shadcnVariables,
         ),
@@ -304,7 +344,7 @@ export function generateShadcnColorAttributes({
       },
       border: {
         color: setColorBasedOnIsLocked(
-          Color("black").mix(Color("white"), 0.15).hex(),
+          Color(hex).mix(Color("black"), 0.8).hex(),
           "dark",
           "border",
           shadcnVariables,
@@ -323,6 +363,46 @@ export function generateShadcnColorAttributes({
       ring: {
         color: setColorBasedOnIsLocked(hex, "dark", "ring", shadcnVariables),
         isLocked: shadcnVariables?.shadcn.dark.ring.isLocked,
+      },
+      chart1: {
+        color: setColorBasedOnIsLocked(hex, "dark", "chart1", shadcnVariables),
+        isLocked: shadcnVariables?.shadcn.dark.chart1.isLocked,
+      },
+      chart2: {
+        color: setColorBasedOnIsLocked(
+          Color(hex).mix(Color("black"), 0.15).hex(),
+          "dark",
+          "chart2",
+          shadcnVariables,
+        ),
+        isLocked: shadcnVariables?.shadcn.dark.chart2.isLocked,
+      },
+      chart3: {
+        color: setColorBasedOnIsLocked(
+          Color(hex).mix(Color("black"), 0.35).hex(),
+          "dark",
+          "chart3",
+          shadcnVariables,
+        ),
+        isLocked: shadcnVariables?.shadcn.dark.chart3.isLocked,
+      },
+      chart4: {
+        color: setColorBasedOnIsLocked(
+          Color(hex).mix(Color("black"), 0.45).hex(),
+          "dark",
+          "chart4",
+          shadcnVariables,
+        ),
+        isLocked: shadcnVariables?.shadcn.dark.chart4.isLocked,
+      },
+      chart5: {
+        color: setColorBasedOnIsLocked(
+          Color(hex).mix(Color("black"), 0.55).hex(),
+          "dark",
+          "chart5",
+          shadcnVariables,
+        ),
+        isLocked: shadcnVariables?.shadcn.dark.chart5.isLocked,
       },
     },
   };

@@ -10,7 +10,7 @@ import { Bed, ChefHat, Sofa } from "lucide-react";
 
 export default function CardLightManager() {
   return (
-    <Card className="border-none shadow-none">
+    <Card className="shadow-none">
       <CardHeader>
         <CardTitle>Lights</CardTitle>
       </CardHeader>

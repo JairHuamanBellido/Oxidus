@@ -5,7 +5,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/src/components/shadcn/card";
-import { Separator } from "@/src/components/shadcn/separator";
 import TypographyMuted from "@/src/components/typography/muted";
 import TypographyParagraph from "@/src/components/typography/paragraph";
 import { useThemeContext } from "@/src/contexts/ThemeContext/ThemeContext";
@@ -21,7 +20,7 @@ export default function CardBill() {
   const background = shadcn[mode].primary.color;
   const mix = mode === "dark" ? "black" : "white";
   return (
-    <Card className="border-none shadow-none">
+    <Card className="shadow-none">
       <CardHeader>
         <CardDescription> Bill</CardDescription>
         <CardTitle className=" flex items-center justify-between">

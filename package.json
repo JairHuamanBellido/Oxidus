@@ -35,6 +35,7 @@
     "react-day-picker": "^8.9.1",
     "react-dom": "^18",
     "react-syntax-highlighter": "^15.5.0",
+    "recharts": "^2.12.7",
     "tailwind-merge": "^1.14.0",
     "tailwindcss-animate": "^1.0.7"
   },

@@ -45,7 +45,7 @@ export default function CardInviteMembers() {
   const background = shadcn[mode].background.color;
   const mixBackground = mode === "dark" ? "white" : "black";
   return (
-    <Card className="border-none shadow-non">
+    <Card className="shadow-none">
       <CardHeader>
         <CardTitle className="text-xl">Invite Team member</CardTitle>
         <CardDescription>

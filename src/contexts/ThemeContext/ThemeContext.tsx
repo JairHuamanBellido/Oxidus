@@ -14,9 +14,10 @@ import { getContrastInfo } from "@/src/utils/colors";
 
 export type ContrastLevels = "low" | "medium" | "good" | "excellent";
 export type ContrastInfo = {
-  level:ContrastLevels;
+  level: ContrastLevels;
   contrast: number;
-}
+};
+
 export interface ColorState {
   color: string;
   isLocked?: boolean;

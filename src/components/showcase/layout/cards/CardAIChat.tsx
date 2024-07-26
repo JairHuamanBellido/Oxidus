@@ -1,7 +1,6 @@
 import {
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
@@ -12,7 +11,7 @@ import TypographyMuted from "@/src/components/typography/muted";
 import TypographyParagraph from "@/src/components/typography/paragraph";
 import { Brain } from "lucide-react";
 
-export default function CardX() {
+export default function CardAIChat() {
   return (
     <Card
       className="col-span-2 row-span-2 flex flex-col justify-between bg-[radial-gradient(circle_at_50%_470%,var(--tw-gradient-stops))] 
@@ -20,9 +19,7 @@ export default function CardX() {
                 to-[hsl(var(--background))] to-85%"
     >
       <CardHeader>
-        <CardTitle className="mb-2 text-center">
-          I'm your AI Assistant
-        </CardTitle>
+        <CardTitle className="mb-2 text-center">Oxidus GPT AI</CardTitle>
         <div className="flex justify-center ">
           <div className="flex items-center space-x-2 text-sm  bg-muted px-2 py-1 rounded-full">
             <Brain size={16} />
@@ -40,14 +37,6 @@ export default function CardX() {
               <TypographyMuted className="text-inherit">
                 What Javascript Framework releases today?
               </TypographyMuted>
-            </div>
-            <div className="transition-all text-foreground cursor-pointer border p-4 rounded-full hover:bg-primary hover:text-primary-foreground">
-              <TypographyMuted className="text-inherit">
-                Recommend a hosting
-              </TypographyMuted>
-            </div>
-            <div className="transition-all text-foreground cursor-pointer border p-4 rounded-full hover:bg-primary hover:text-primary-foreground">
-              <TypographyMuted className="text-inherit">12312?</TypographyMuted>
             </div>
           </div>
         </div>

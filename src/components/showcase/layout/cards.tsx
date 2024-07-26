@@ -6,7 +6,7 @@ import { SalesLineChart } from "../../chart/sales-line-chart";
 import SidebarShowCase from "../../sidebar/SidebarShowcase";
 import { PortfolioDistributionCard } from "../../chart/portfolio-distribution-chart";
 import CardDailySummary from "./cards/CardDailySummary";
-import CardX from "./cards/CardX";
+import CardAIChat from "./cards/CardAIChat";
 import CardTodayCalendar from "./cards/CardTodayCalendar";
 import CardTaskScrum from "./cards/CardTaskScrum";
 import CardContribution from "./cards/CardContribution";
@@ -27,7 +27,7 @@ function CardContainer() {
       <CardTaskScrum />
       <CardKeyboard />
       <CardContribution />
-      <CardX />
+      <CardAIChat />
     </div>
   );
 }

@@ -29,13 +29,13 @@ export default function CardInviteMembers() {
 
   const members = [
     {
-      name: "Willington Ortiz",
+      name: "Jhon Doe",
       position: "Software Engineer",
       avatarUrl: "/avatar-1.svg",
       role: "owner",
     },
     {
-      name: "Jose Huaman Aparcana",
+      name: "Daniel",
       position: "Software Engineer",
       avatarUrl: "/avatar-2.svg",
       role: "editor",

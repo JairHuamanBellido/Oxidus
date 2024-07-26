@@ -13,8 +13,8 @@ export default function Header() {
       <div className="flex items-center space-x-2 relative h-full">
         <TypographyH1 className="text-xl">Oxidus</TypographyH1>
         <Separator className="h-1/2" orientation="vertical" />
-        <TypographyMuted>
-          Generators colors for ui shadcn applications
+        <TypographyMuted className="text-foreground">
+          Craft Your Palette for your Shadcn components
         </TypographyMuted>
       </div>
       <div className="flex items-center space-x-2">

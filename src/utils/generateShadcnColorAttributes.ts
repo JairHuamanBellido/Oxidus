@@ -47,7 +47,8 @@ export function generateShadcnColorAttributes({
   const lightMutedForeground = Color("white").hsl().darken(0.6).hex();
   const lightAccent = Color(hex).mix(Color("white"), 0.9).hex();
   const lightAccentForeground = hex;
-
+  const lightInput = Color(hex).mix(Color("black"), 0.5).mix(Color('white'),0.75).hex();
+  
   const darkBackground = darkColors[0];
   const darkForeground = Color(hex).mix(Color("white"), 0.85).hex();
   const darkCard = Color(hex).mix(Color("#0a0a0a"), 0.96).hex();
@@ -62,6 +63,7 @@ export function generateShadcnColorAttributes({
     .hex();
   const darkAccent = Color("black").mix(Color(hex), 0.35).hex();
   const darkAccentForeground = Color(hex).mix(Color("white"), 0.85).hex();
+  const darkInput = Color(hex).mix(Color("white"), 0.6).mix(Color('black'),0.75).hex()
 
   return {
     light: {
@@ -230,7 +232,7 @@ export function generateShadcnColorAttributes({
       },
       input: {
         color: setColorBasedOnIsLocked(
-          Color("white").hsl().darken(0.1).hex(),
+          lightInput,
           "light",
           "input",
           shadcnVariables,
@@ -448,7 +450,7 @@ export function generateShadcnColorAttributes({
       },
       input: {
         color: setColorBasedOnIsLocked(
-          Color("black").mix(Color("white"), 0.15).hex(),
+          darkInput,
           "dark",
           "input",
           shadcnVariables,

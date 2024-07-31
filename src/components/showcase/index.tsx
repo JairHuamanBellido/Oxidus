@@ -15,7 +15,7 @@ export default function ShowCase() {
       <TabsContent className="w-full h-full relative" value="cards">
         <CardShowcase />
       </TabsContent>
-      <TabsContent className="w-full h-full relative" value="auth">
+      <TabsContent className="w-full h-[calc(100%_-_40px)] overflow-auto relative" value="auth">
         <AuthenticationShowcase />
       </TabsContent>
       <TabsContent className="w-full h-full relative" value="settings">

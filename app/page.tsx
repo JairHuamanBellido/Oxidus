@@ -46,7 +46,7 @@ export default function Home() {
           <Header />
           <Layout>
             <ThemeVariablesSettingSidebar />
-            <div className="flex items-center overflow-auto justify-center bg-background p-8 rounded w-full h-full relative">
+            <div className="flex items-center overflow-auto justify-center bg-background p-4 rounded w-full h-full relative">
               <ShowCase />
             </div>
           </Layout>

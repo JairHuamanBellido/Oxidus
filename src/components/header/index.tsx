@@ -5,6 +5,8 @@ import ThemeToggle from "./ThemeToggle";
 import ColorPickerOption from "../theme/ColorPicker";
 import TypographyH1 from "../typography/h1";
 import TypographyMuted from "../typography/muted";
+import { Github } from "lucide-react";
+import Link from "next/link";
 export default function Header() {
   return (
     <header
@@ -20,6 +22,12 @@ export default function Header() {
       <div className="flex items-center space-x-2">
         <ColorPickerOption />
         <ButtonShowCode />
+        <Link
+          target="_blank"
+          href={"https://github.com/JairHuamanBellido/Oxidus"}
+        >
+          <Github />
+        </Link>
         <ThemeToggle />
       </div>
     </header>

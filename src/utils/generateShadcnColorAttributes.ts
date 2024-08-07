@@ -46,7 +46,7 @@ export function generateShadcnColorAttributes({
   const lightMuted = Color(hex).mix(Color("white"), 0.9).hex();
   const lightMutedForeground = Color("white").hsl().darken(0.6).hex();
   const lightAccent = Color(hex).mix(Color("white"), 0.9).hex();
-  const lightAccentForeground = hex;
+  const lightAccentForeground = Color(hex).mix(Color("black"), 0.85).hex();
   const lightInput = Color(hex).mix(Color("black"), 0.5).mix(Color('white'),0.75).hex();
   
   const darkBackground = darkColors[0];

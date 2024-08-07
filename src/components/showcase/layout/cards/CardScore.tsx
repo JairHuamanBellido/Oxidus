@@ -23,7 +23,7 @@ export default function CardScore() {
 
   const mixBackground = mode === "dark" ? "white" : "black";
   return (
-    <Card className="border-none shadow-none">
+    <Card className="shadow-none">
       <CardHeader>
         <CardTitle> Score</CardTitle>
       </CardHeader>

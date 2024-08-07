@@ -1,8 +1,8 @@
 import {
+  ContrastInfo,
   ShadcnVariables,
   useThemeContext,
 } from "@/src/contexts/ThemeContext/ThemeContext";
-import TypographyMuted from "../typography/muted";
 
 import {
   Popover,
@@ -11,9 +11,14 @@ import {
 } from "@/src/components/shadcn/popover";
 import { ColorPicker, useColor } from "react-color-palette";
 import { useEffect } from "react";
+import { Button } from "../shadcn/button";
+import { Lock, Unlock } from "lucide-react";
+import TypographyH3 from "../typography/h3";
+import AccessibilityIndicatorIcon from "../icon/accesibility-indicator-icon";
+import TypographyParagraph from "../typography/paragraph";
 
 function SmallColorBlockRounded({ hex }: { hex: string }) {
-  return <div className="w-8 h-8 rounded" style={{ background: hex }}></div>;
+  return <div className="w-4 h-4 rounded" style={{ background: hex }}></div>;
 }
 
 function CssVariablesContainer({
@@ -21,6 +26,7 @@ function CssVariablesContainer({
   hex,
   changeCssVariables,
   theme,
+  contrastInfo,
   isLocked,
 }: {
   variable: keyof ShadcnVariables;
@@ -33,16 +39,16 @@ function CssVariablesContainer({
     lock?: boolean | undefined,
   ) => void;
   theme: "dark" | "light";
+  contrastInfo?: ContrastInfo;
 }) {
-  const { lightColors, darkColors } = useThemeContext();
   const [color, setColor] = useColor(hex);
 
   useEffect(() => {
     changeCssVariables(variable, color.hex, theme);
   }, [color]);
   return (
-    <div className="h-20">
-      <div className="flex flex-col items-center rounded space-y-2">
+    <div className="relative pt-4 flex items-center justify-between">
+      <div className="flex items-center rounded space-x-2">
         <Popover>
           <PopoverTrigger>
             <SmallColorBlockRounded hex={hex} />
@@ -56,9 +62,14 @@ function CssVariablesContainer({
             />
           </PopoverContent>
         </Popover>
-        <TypographyMuted className="capitalize">{variable}</TypographyMuted>
+        <TypographyParagraph className=" max-w-[150px] truncate capitalize">
+          {variable}
+        </TypographyParagraph>
       </div>
-      {/* <div>
+      <div className="flex items-center">
+        {!!contrastInfo && (
+          <AccessibilityIndicatorIcon contrastInfo={contrastInfo} />
+        )}
         <Button
           variant={"secondary"}
           className="w-fit p-1 h-fit bg-transparent"
@@ -72,7 +83,7 @@ function CssVariablesContainer({
             <Unlock className="text-secondary-foreground/40" height={16} />
           )}
         </Button>
-      </div> */}
+      </div>
     </div>
   );
 }
@@ -128,7 +139,10 @@ export default function ThemeVariablesSettingSidebar() {
       }}
       className="w-[300px] overflow-y-auto p-4 h-[calc(100vh_-_80px)] relative overflow-auto "
     >
-      <div className="h-fit grid grid-cols-2 gap-4  overflow-auto">
+      <TypographyH3 className="mb-4">
+        {mode === "dark" ? "Dark variables" : "Light variables"}
+      </TypographyH3>
+      <div className="h-fit flex flex-col space-y-2  overflow-auto">
         {mode === "light" &&
           Object.keys(light).map((e) => (
             <CssVariablesContainer
@@ -138,6 +152,7 @@ export default function ThemeVariablesSettingSidebar() {
               changeCssVariables={changeCssVariables}
               theme="light"
               isLocked={light[e as keyof ShadcnVariables].isLocked}
+              contrastInfo={light[e as keyof ShadcnVariables].contrastChecker}
             />
           ))}
 
@@ -150,6 +165,7 @@ export default function ThemeVariablesSettingSidebar() {
               changeCssVariables={changeCssVariables}
               theme="dark"
               isLocked={dark[e as keyof ShadcnVariables].isLocked}
+              contrastInfo={dark[e as keyof ShadcnVariables].contrastChecker}
             />
           ))}
       </div>

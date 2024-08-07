@@ -3,6 +3,7 @@ import {
   ThemeVariables,
 } from "@/src/contexts/ThemeContext/ThemeContext";
 import Color from "color";
+import { getContrastInfo } from "./colors";
 
 const setColorBasedOnIsLocked = (
   newColor: string,
@@ -29,11 +30,46 @@ export function generateShadcnColorAttributes({
   lightColors: string[];
   shadcnVariables?: ThemeVariables["cssVariables"];
 }) {
+  const primary = hex;
+  const primaryForeground = Color({ hex: primary }).isDark()
+    ? Color(hex).mix(Color("white"), 0.9).hex()
+    : Color(hex).mix(Color("black"), 0.9).hex();
+
+  const lightBackground = lightColors[lightColors.length - 1];
+  const lightForeground = Color(hex).mix(Color("black"), 0.9).hex();
+  const lightCard = Color(hex).mix(Color("white"), 0.95).hex();
+  const lightCardForeground = Color(hex).mix(Color("black"), 0.9).hex();
+  const lightPopover = Color("white").hex();
+  const lightPopoverForeground = Color(hex).mix(Color("black"), 0.9).hex();
+  const lightSecondary = Color(hex).mix(Color("white"), 0.85).hex();
+  const lightSecondaryForeground = darkColors[0];
+  const lightMuted = Color(hex).mix(Color("white"), 0.9).hex();
+  const lightMutedForeground = Color("white").hsl().darken(0.6).hex();
+  const lightAccent = Color(hex).mix(Color("white"), 0.9).hex();
+  const lightAccentForeground = Color(hex).mix(Color("black"), 0.85).hex();
+  const lightInput = Color(hex).mix(Color("black"), 0.5).mix(Color('white'),0.75).hex();
+  
+  const darkBackground = darkColors[0];
+  const darkForeground = Color(hex).mix(Color("white"), 0.85).hex();
+  const darkCard = Color(hex).mix(Color("#0a0a0a"), 0.96).hex();
+  const darkCardForeground = Color(hex).mix(Color("white"), 0.85).hex();
+  const darkPopover = darkColors[0];
+  const darkPopoverForeground = Color(hex).mix(Color("white"), 0.85).hex();
+  const darkSecondary = Color("black").mix(Color(hex), 0.35).hex();
+  const darkSecondaryForeground = Color("white").hex();
+  const darkMuted = Color(darkColors[0]).mix(Color("white"), 0.1).hex();
+  const darkMutedForeground = Color(darkColors[0])
+    .mix(Color("white"), 0.5)
+    .hex();
+  const darkAccent = Color("black").mix(Color(hex), 0.35).hex();
+  const darkAccentForeground = Color(hex).mix(Color("white"), 0.85).hex();
+  const darkInput = Color(hex).mix(Color("white"), 0.6).mix(Color('black'),0.75).hex()
+
   return {
     light: {
       background: {
         color: setColorBasedOnIsLocked(
-          lightColors[lightColors.length - 1],
+          lightBackground,
           "light",
           "background",
           shadcnVariables,
@@ -42,16 +78,20 @@ export function generateShadcnColorAttributes({
       },
       foreground: {
         color: setColorBasedOnIsLocked(
-          Color(hex).mix(Color("black"), 0.9).hex(),
+          lightForeground,
           "light",
           "foreground",
           shadcnVariables,
         ),
         isLocked: shadcnVariables?.shadcn.light.foreground.isLocked,
+        contrastChecker: getContrastInfo({
+          backgroundColor: lightBackground,
+          foregroundColor: lightForeground,
+        }),
       },
       primary: {
         color: setColorBasedOnIsLocked(
-          hex,
+          primary,
           "light",
           "primary",
           shadcnVariables,
@@ -60,16 +100,20 @@ export function generateShadcnColorAttributes({
       },
       primaryForeground: {
         color: setColorBasedOnIsLocked(
-          Color("white").hex(),
+          primaryForeground,
           "light",
           "primaryForeground",
           shadcnVariables,
         ),
         isLocked: shadcnVariables?.shadcn.light.primaryForeground.isLocked,
+        contrastChecker: getContrastInfo({
+          backgroundColor: primary,
+          foregroundColor: primaryForeground,
+        }),
       },
       card: {
         color: setColorBasedOnIsLocked(
-          lightColors[lightColors.length - 1],
+          lightCard,
           "light",
           "card",
           shadcnVariables,
@@ -78,16 +122,20 @@ export function generateShadcnColorAttributes({
       },
       cardForeground: {
         color: setColorBasedOnIsLocked(
-          Color(hex).mix(Color("black"), 0.9).hex(),
+          lightCardForeground,
           "light",
           "cardForeground",
           shadcnVariables,
         ),
         isLocked: shadcnVariables?.shadcn.light.cardForeground.isLocked,
+        contrastChecker: getContrastInfo({
+          backgroundColor: lightCard,
+          foregroundColor: lightCardForeground,
+        }),
       },
       popover: {
         color: setColorBasedOnIsLocked(
-          Color("white").hex(),
+          lightPopover,
           "light",
           "popover",
           shadcnVariables,
@@ -96,16 +144,20 @@ export function generateShadcnColorAttributes({
       },
       popoverForeground: {
         color: setColorBasedOnIsLocked(
-          Color(hex).mix(Color("black"), 0.9).hex(),
+          lightPopoverForeground,
           "light",
           "popoverForeground",
           shadcnVariables,
         ),
         isLocked: shadcnVariables?.shadcn.light.popoverForeground.isLocked,
+        contrastChecker: getContrastInfo({
+          backgroundColor: lightPopover,
+          foregroundColor: lightPopoverForeground,
+        }),
       },
       secondary: {
         color: setColorBasedOnIsLocked(
-          Color(hex).mix(Color("white"), 0.85).hex(),
+          lightSecondary,
           "light",
           "secondary",
           shadcnVariables,
@@ -114,16 +166,20 @@ export function generateShadcnColorAttributes({
       },
       secondaryForeground: {
         color: setColorBasedOnIsLocked(
-          darkColors[0],
+          lightSecondaryForeground,
           "light",
           "secondaryForeground",
           shadcnVariables,
         ),
         isLocked: shadcnVariables?.shadcn.light.secondaryForeground.isLocked,
+        contrastChecker: getContrastInfo({
+          backgroundColor: lightSecondary,
+          foregroundColor: lightSecondaryForeground,
+        }),
       },
       muted: {
         color: setColorBasedOnIsLocked(
-          Color(hex).mix(Color("white"), 0.9).hex(),
+          lightMuted,
           "light",
           "muted",
           shadcnVariables,
@@ -132,16 +188,20 @@ export function generateShadcnColorAttributes({
       },
       mutedForeground: {
         color: setColorBasedOnIsLocked(
-          Color("white").hsl().darken(0.6).hex(),
+          lightMutedForeground,
           "light",
           "mutedForeground",
           shadcnVariables,
         ),
         isLocked: shadcnVariables?.shadcn.light.mutedForeground.isLocked,
+        contrastChecker: getContrastInfo({
+          backgroundColor: lightMuted,
+          foregroundColor: lightMutedForeground,
+        }),
       },
       accent: {
         color: setColorBasedOnIsLocked(
-          Color(hex).mix(Color("white"), 0.90).hex(),
+          lightAccent,
           "light",
           "accent",
           shadcnVariables,
@@ -150,16 +210,20 @@ export function generateShadcnColorAttributes({
       },
       accentForeground: {
         color: setColorBasedOnIsLocked(
-          hex,
+          lightAccentForeground,
           "light",
           "accentForeground",
           shadcnVariables,
         ),
         isLocked: shadcnVariables?.shadcn.light.accentForeground.isLocked,
+        contrastChecker: getContrastInfo({
+          backgroundColor: lightAccent,
+          foregroundColor: lightAccentForeground,
+        }),
       },
       border: {
         color: setColorBasedOnIsLocked(
-          Color("white").hsl().darken(0.1).hex(),
+          Color(hex).mix(Color("white"), 0.8).hex(),
           "light",
           "border",
           shadcnVariables,
@@ -168,7 +232,7 @@ export function generateShadcnColorAttributes({
       },
       input: {
         color: setColorBasedOnIsLocked(
-          Color("white").hsl().darken(0.1).hex(),
+          lightInput,
           "light",
           "input",
           shadcnVariables,
@@ -179,11 +243,51 @@ export function generateShadcnColorAttributes({
         color: setColorBasedOnIsLocked(hex, "light", "ring", shadcnVariables),
         isLocked: shadcnVariables?.shadcn.light.ring.isLocked,
       },
+      chart1: {
+        color: setColorBasedOnIsLocked(hex, "light", "chart1", shadcnVariables),
+        isLocked: shadcnVariables?.shadcn.light.chart1.isLocked,
+      },
+      chart2: {
+        color: setColorBasedOnIsLocked(
+          Color(hex).mix(Color("white"), 0.15).hex(),
+          "light",
+          "chart2",
+          shadcnVariables,
+        ),
+        isLocked: shadcnVariables?.shadcn.light.chart2.isLocked,
+      },
+      chart3: {
+        color: setColorBasedOnIsLocked(
+          Color(hex).mix(Color("white"), 0.35).hex(),
+          "light",
+          "chart3",
+          shadcnVariables,
+        ),
+        isLocked: shadcnVariables?.shadcn.light.chart3.isLocked,
+      },
+      chart4: {
+        color: setColorBasedOnIsLocked(
+          Color(hex).mix(Color("white"), 0.45).hex(),
+          "light",
+          "chart4",
+          shadcnVariables,
+        ),
+        isLocked: shadcnVariables?.shadcn.light.chart4.isLocked,
+      },
+      chart5: {
+        color: setColorBasedOnIsLocked(
+          Color(hex).mix(Color("white"), 0.55).hex(),
+          "light",
+          "chart5",
+          shadcnVariables,
+        ),
+        isLocked: shadcnVariables?.shadcn.light.chart5.isLocked,
+      },
     },
     dark: {
       background: {
         color: setColorBasedOnIsLocked(
-          darkColors[0],
+          darkBackground,
           "dark",
           "background",
           shadcnVariables,
@@ -192,30 +296,43 @@ export function generateShadcnColorAttributes({
       },
       foreground: {
         color: setColorBasedOnIsLocked(
-          Color(hex).mix(Color("white"), 0.85).hex(),
+          darkForeground,
           "dark",
           "foreground",
           shadcnVariables,
         ),
         isLocked: shadcnVariables?.shadcn.dark.foreground.isLocked,
+        contrastChecker: getContrastInfo({
+          backgroundColor: darkBackground,
+          foregroundColor: darkForeground,
+        }),
       },
       primary: {
-        color: setColorBasedOnIsLocked(hex, "dark", "primary", shadcnVariables),
+        color: setColorBasedOnIsLocked(
+          primary,
+          "dark",
+          "primary",
+          shadcnVariables,
+        ),
         isLocked: shadcnVariables?.shadcn.dark.primary.isLocked,
       },
       primaryForeground: {
         color: setColorBasedOnIsLocked(
-          Color("white").hex(),
+          primaryForeground,
           "dark",
           "primaryForeground",
           shadcnVariables,
         ),
         isLocked: shadcnVariables?.shadcn.dark.primaryForeground.isLocked,
+        contrastChecker: getContrastInfo({
+          backgroundColor: primary,
+          foregroundColor: primaryForeground,
+        }),
       },
       card: {
         color: setColorBasedOnIsLocked(
-          darkColors[0],
-          "dark",
+          darkCard,
+          "light",
           "card",
           shadcnVariables,
         ),
@@ -223,16 +340,20 @@ export function generateShadcnColorAttributes({
       },
       cardForeground: {
         color: setColorBasedOnIsLocked(
-          Color(hex).mix(Color("white"), 0.85).hex(),
+          darkCardForeground,
           "dark",
           "cardForeground",
           shadcnVariables,
         ),
         isLocked: shadcnVariables?.shadcn.dark.cardForeground.isLocked,
+        contrastChecker: getContrastInfo({
+          backgroundColor: darkCard,
+          foregroundColor: darkCardForeground,
+        }),
       },
       popover: {
         color: setColorBasedOnIsLocked(
-          darkColors[0],
+          darkPopover,
           "dark",
           "popover",
           shadcnVariables,
@@ -241,12 +362,16 @@ export function generateShadcnColorAttributes({
       },
       popoverForeground: {
         color: setColorBasedOnIsLocked(
-          Color(hex).mix(Color("white"), 0.85).hex(),
+          darkPopoverForeground,
           "dark",
           "popoverForeground",
           shadcnVariables,
         ),
         isLocked: shadcnVariables?.shadcn.dark.popoverForeground.isLocked,
+        contrastChecker: getContrastInfo({
+          backgroundColor: darkPopover,
+          foregroundColor: darkPopoverForeground,
+        }),
       },
       secondary: {
         color: setColorBasedOnIsLocked(
@@ -265,10 +390,14 @@ export function generateShadcnColorAttributes({
           shadcnVariables,
         ),
         isLocked: shadcnVariables?.shadcn.dark.secondaryForeground.isLocked,
+        contrastChecker: getContrastInfo({
+          backgroundColor: darkSecondary,
+          foregroundColor: darkSecondaryForeground,
+        }),
       },
       muted: {
         color: setColorBasedOnIsLocked(
-          Color(darkColors[0]).mix(Color("white"), 0.1).hex(),
+          darkMuted,
           "dark",
           "muted",
           shadcnVariables,
@@ -277,16 +406,20 @@ export function generateShadcnColorAttributes({
       },
       mutedForeground: {
         color: setColorBasedOnIsLocked(
-          Color(darkColors[0]).mix(Color("white"), 0.5).hex(),
+          darkMutedForeground,
           "dark",
           "mutedForeground",
           shadcnVariables,
         ),
         isLocked: shadcnVariables?.shadcn.dark.mutedForeground.isLocked,
+        contrastChecker: getContrastInfo({
+          backgroundColor: darkMuted,
+          foregroundColor: darkMutedForeground,
+        }),
       },
       accent: {
         color: setColorBasedOnIsLocked(
-          Color("black").mix(Color(hex), 0.35).hex(),
+          darkAccent,
           "dark",
           "accent",
           shadcnVariables,
@@ -295,16 +428,20 @@ export function generateShadcnColorAttributes({
       },
       accentForeground: {
         color: setColorBasedOnIsLocked(
-          Color(hex).mix(Color("white"), 0.85).hex(),
+          darkAccentForeground,
           "dark",
           "accentForeground",
           shadcnVariables,
         ),
         isLocked: shadcnVariables?.shadcn.dark.accentForeground.isLocked,
+        contrastChecker: getContrastInfo({
+          backgroundColor: darkAccent,
+          foregroundColor: darkAccentForeground,
+        }),
       },
       border: {
         color: setColorBasedOnIsLocked(
-          Color("black").mix(Color("white"), 0.15).hex(),
+          Color(hex).mix(Color("black"), 0.8).hex(),
           "dark",
           "border",
           shadcnVariables,
@@ -313,7 +450,7 @@ export function generateShadcnColorAttributes({
       },
       input: {
         color: setColorBasedOnIsLocked(
-          Color("black").mix(Color("white"), 0.15).hex(),
+          darkInput,
           "dark",
           "input",
           shadcnVariables,
@@ -323,6 +460,46 @@ export function generateShadcnColorAttributes({
       ring: {
         color: setColorBasedOnIsLocked(hex, "dark", "ring", shadcnVariables),
         isLocked: shadcnVariables?.shadcn.dark.ring.isLocked,
+      },
+      chart1: {
+        color: setColorBasedOnIsLocked(hex, "dark", "chart1", shadcnVariables),
+        isLocked: shadcnVariables?.shadcn.dark.chart1.isLocked,
+      },
+      chart2: {
+        color: setColorBasedOnIsLocked(
+          Color(hex).mix(Color("black"), 0.15).hex(),
+          "dark",
+          "chart2",
+          shadcnVariables,
+        ),
+        isLocked: shadcnVariables?.shadcn.dark.chart2.isLocked,
+      },
+      chart3: {
+        color: setColorBasedOnIsLocked(
+          Color(hex).mix(Color("black"), 0.35).hex(),
+          "dark",
+          "chart3",
+          shadcnVariables,
+        ),
+        isLocked: shadcnVariables?.shadcn.dark.chart3.isLocked,
+      },
+      chart4: {
+        color: setColorBasedOnIsLocked(
+          Color(hex).mix(Color("black"), 0.45).hex(),
+          "dark",
+          "chart4",
+          shadcnVariables,
+        ),
+        isLocked: shadcnVariables?.shadcn.dark.chart4.isLocked,
+      },
+      chart5: {
+        color: setColorBasedOnIsLocked(
+          Color(hex).mix(Color("black"), 0.55).hex(),
+          "dark",
+          "chart5",
+          shadcnVariables,
+        ),
+        isLocked: shadcnVariables?.shadcn.dark.chart5.isLocked,
       },
     },
   };

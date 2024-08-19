@@ -19,13 +19,15 @@ export default function CopyButton({ codeToCopy }: CopyButtonProps) {
   const handleCopy = () => {
     navigator.clipboard.writeText(codeToCopy).then(
       () => {
-        console.log("Text copied to clipboard");
         toast({
           title: "CSS variables copied to clipboard",
         });
       },
       (err) => {
         console.error("Failed to copy text: ", err);
+        toast({
+          title: "Failed to copy CSS variables",
+        });
       },
     );
   };

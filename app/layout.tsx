@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { Manrope } from "next/font/google";
 import { ReactNode } from "react";
 import "react-color-palette/css";
+import { Toaster } from "@/src/components/shadcn/toaster";
 
 const inter = Manrope({ subsets: ["latin"] });
 
@@ -35,6 +36,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body className={inter.className}>
         <GoogleAnalytics />
         {children}
+        <Toaster />
       </body>
     </html>
   );

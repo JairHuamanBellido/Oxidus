@@ -31,11 +31,11 @@ export function generateShadcnCssVariables(theme: ShadcnVariables) {
 --input: ${extractHSLValues(theme.input.color)};
 --ring: ${extractHSLValues(theme.ring.color)};
 
---chart-1: ${extractHSLValues(theme.chart1.color)}
---chart-2: ${extractHSLValues(theme.chart2.color)}
---chart-3: ${extractHSLValues(theme.chart3.color)}
---chart-4: ${extractHSLValues(theme.chart4.color)}
---chart-5: ${extractHSLValues(theme.chart5.color)}
+--chart-1: ${extractHSLValues(theme.chart1.color)};
+--chart-2: ${extractHSLValues(theme.chart2.color)};
+--chart-3: ${extractHSLValues(theme.chart3.color)};
+--chart-4: ${extractHSLValues(theme.chart4.color)};
+--chart-5: ${extractHSLValues(theme.chart5.color)};
 
 --radius: 0.5rem;
     `;

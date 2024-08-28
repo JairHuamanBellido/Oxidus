@@ -1,56 +1,35 @@
-import { useThemeContext } from "@/src/contexts/ThemeContext/ThemeContext";
-import { Button } from "@/src/components/shadcn/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/src/components/shadcn/dropdown-menu";
 import { cn } from "@/src/utils/utils";
 import { MoonIcon, SunIcon } from "lucide-react";
+import { Switch } from "@/src/components/shadcn/switch";
+import { useThemeContext } from "@/src/contexts/ThemeContext/ThemeContext";
 
 export default function ThemeToggle() {
   const { setMode, mode } = useThemeContext();
 
+  const isDarkMode = mode === "dark";
+
+  const handleToggle = () => {
+    setMode(isDarkMode ? "light" : "dark");
+    (window as any).gtag("event", isDarkMode ? "light-mode" : "dark-mode");
+  };
+
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button variant="ghost" className="w-9 px-0">
-          <SunIcon
-            className={cn(
-              "h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all ",
-              { "-rotate-90": mode === "dark" },
-              { "scale-0": mode === "dark" },
-            )}
-          />
-          <MoonIcon
-            className={cn(
-              "absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100",
-              { "rotate-0": mode === "dark" },
-              { "scale-100": mode === "dark" },
-            )}
-          />
-          <span className="sr-only">Toggle theme</span>
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
-        <DropdownMenuItem
-          onClick={() => {
-            setMode("light");
-            (window as any).gtag("event", "light-mode");
-          }}
-        >
-          Light
-        </DropdownMenuItem>
-        <DropdownMenuItem
-          onClick={() => {
-            setMode("dark");
-            (window as any).gtag("event", "dark-mode");
-          }}
-        >
-          Dark
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
+    <div className="flex items-center space-x-2">
+      {isDarkMode ? (
+        <MoonIcon className="h-5 w-5 text-[#D8DEE9]" />
+      ) : (
+        <SunIcon className="h-5 w-5 text-[#4C566A]" />
+      )}
+      <Switch
+        checked={isDarkMode}
+        onCheckedChange={handleToggle}
+        className={cn(
+          "rounded-full",
+          isDarkMode
+            ? "bg-[#36FF3B] border-transparent"
+            : "bg-[#ECEFF4] border-transparent",
+        )}
+      />
+    </div>
   );
 }

@@ -31,7 +31,10 @@
     "color": "^4.2.3",
     "d3": "^7.9.0",
     "date-fns": "^2.30.0",
+    "dexie": "^4.0.10",
+    "dexie-react-hooks": "^1.1.7",
     "framer-motion": "^11.3.19",
+    "lodash": "^4.17.21",
     "lucide-react": "^0.284.0",
     "next": "13.5.4",
     "react": "^18",
@@ -41,11 +44,13 @@
     "react-syntax-highlighter": "^15.5.0",
     "recharts": "^2.12.7",
     "tailwind-merge": "^1.14.0",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "zustand": "^5.0.3"
   },
   "devDependencies": {
     "@types/color": "^3.0.4",
     "@types/d3": "^7.4.3",
+    "@types/lodash": "^4.17.15",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

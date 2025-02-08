@@ -21,13 +21,10 @@ const setColorBasedOnIsLocked = (
 
 export function generateShadcnColorAttributes({
   hex,
-  darkColors,
-  lightColors,
   shadcnVariables,
 }: {
   hex: string;
-  darkColors: string[];
-  lightColors: string[];
+
   shadcnVariables?: ThemeVariables["cssVariables"];
 }) {
   const primary = hex;
@@ -35,35 +32,39 @@ export function generateShadcnColorAttributes({
     ? Color(hex).mix(Color("white"), 0.9).hex()
     : Color(hex).mix(Color("black"), 0.9).hex();
 
-  const lightBackground = lightColors[lightColors.length - 1];
+  const lightBackground = "#ffffff";
   const lightForeground = Color(hex).mix(Color("black"), 0.9).hex();
   const lightCard = Color(hex).mix(Color("white"), 0.95).hex();
   const lightCardForeground = Color(hex).mix(Color("black"), 0.9).hex();
   const lightPopover = Color("white").hex();
   const lightPopoverForeground = Color(hex).mix(Color("black"), 0.9).hex();
   const lightSecondary = Color(hex).mix(Color("white"), 0.85).hex();
-  const lightSecondaryForeground = darkColors[0];
+  const lightSecondaryForeground = "#000000";
   const lightMuted = Color(hex).mix(Color("white"), 0.9).hex();
   const lightMutedForeground = Color("white").hsl().darken(0.6).hex();
   const lightAccent = Color(hex).mix(Color("white"), 0.9).hex();
   const lightAccentForeground = Color(hex).mix(Color("black"), 0.85).hex();
-  const lightInput = Color(hex).mix(Color("black"), 0.5).mix(Color('white'),0.75).hex();
-  
-  const darkBackground = darkColors[0];
+  const lightInput = Color(hex)
+    .mix(Color("black"), 0.5)
+    .mix(Color("white"), 0.75)
+    .hex();
+
+  const darkBackground = "#000000";
   const darkForeground = Color(hex).mix(Color("white"), 0.85).hex();
   const darkCard = Color(hex).mix(Color("#0a0a0a"), 0.96).hex();
   const darkCardForeground = Color(hex).mix(Color("white"), 0.85).hex();
-  const darkPopover = darkColors[0];
+  const darkPopover = "#000000";
   const darkPopoverForeground = Color(hex).mix(Color("white"), 0.85).hex();
   const darkSecondary = Color("black").mix(Color(hex), 0.35).hex();
   const darkSecondaryForeground = Color("white").hex();
-  const darkMuted = Color(darkColors[0]).mix(Color("white"), 0.1).hex();
-  const darkMutedForeground = Color(darkColors[0])
-    .mix(Color("white"), 0.5)
-    .hex();
+  const darkMuted = Color("#000000").mix(Color("white"), 0.1).hex();
+  const darkMutedForeground = Color("#000000").mix(Color("white"), 0.5).hex();
   const darkAccent = Color("black").mix(Color(hex), 0.35).hex();
   const darkAccentForeground = Color(hex).mix(Color("white"), 0.85).hex();
-  const darkInput = Color(hex).mix(Color("white"), 0.6).mix(Color('black'),0.75).hex()
+  const darkInput = Color(hex)
+    .mix(Color("white"), 0.6)
+    .mix(Color("black"), 0.75)
+    .hex();
 
   return {
     light: {

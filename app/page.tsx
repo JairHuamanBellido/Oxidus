@@ -4,11 +4,8 @@ import {
   ThemeContextProvider,
   useThemeContext,
 } from "@/src/contexts/ThemeContext/ThemeContext";
-
 import Header from "../src/components/header";
 import ThemeModifier from "../src/components/theme/ThemeModifier";
-
-import ThemeVariablesSettingSidebar from "../src/components/sidebar/ThemeVariablesSettingSidebar";
 import Color from "color";
 import { ReactNode } from "react";
 import ShowCase from "@/src/components/showcase";
@@ -45,7 +42,6 @@ export default function Home() {
         <div className="w-screen h-screen relative">
           <Header />
           <Layout>
-            <ThemeVariablesSettingSidebar />
             <div className="flex items-center overflow-auto justify-center bg-background p-4 rounded w-full h-full relative">
               <ShowCase />
             </div>

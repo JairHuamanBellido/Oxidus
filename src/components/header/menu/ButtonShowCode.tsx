@@ -19,9 +19,10 @@ import {
 } from "@/src/components/shadcn/tabs";
 import { generateShadcnCssVariables } from "@/src/utils/generateShadcnCssVariables";
 import SyntaxHighlighter from "react-syntax-highlighter/dist/esm/default-highlight";
-import CopyButton from "./CopyCodeButton";
+import CopyButton from "../CopyCodeButton";
+import { Code } from "lucide-react";
 
-export default function ButtonShowCode() {
+export default function ShowCodeMenuItem() {
   const {
     cssVariables: {
       shadcn: { dark, light },
@@ -40,12 +41,13 @@ export default function ButtonShowCode() {
     <Dialog>
       <DialogTrigger asChild>
         <Button
+        className="w-9 px-0"
           onClick={() => {
             (window as any).gtag("event", "show-css-code");
           }}
-          variant="outline"
+          variant="ghost"
         >
-          Show code
+          <Code strokeWidth={1.5} size={20} />
         </Button>
       </DialogTrigger>
       <DialogContent>

@@ -54,22 +54,13 @@ export type ThemeVariables = {
   r: number;
   g: number;
   b: number;
-  darkColorsAmount: number;
-  darkness: number;
-  darkColorsHueAngle: number;
-  darkColorsSaturation: number;
-  lightColorsAmount: number;
-  lightness: number;
-  lightColorsHueAngle: number;
-  lightColorsSaturation: number;
-  darkColors: string[];
-  lightColors: string[];
   cssVariables: {
     shadcn: {
       light: ShadcnVariables;
       dark: ShadcnVariables;
     };
   };
+  isCustomTheme: boolean;
   mode: "dark" | "light";
 };
 
@@ -77,39 +68,16 @@ export type ThemeContextType = ThemeVariables & {
   setMainColor: (color: number) => void;
   setRGB: (r: number, g: number, b: number) => void;
   setHex: (hex: string) => void;
-  setDarkThemeSettings: (
-    darkThemeSettings: Pick<
-      ThemeVariables,
-      | "darkColorsAmount"
-      | "darkColorsHueAngle"
-      | "darkness"
-      | "darkColorsSaturation"
-    >,
-  ) => void;
-  setLightThemeSettings: (
-    lightThemeSettings: Pick<
-      ThemeVariables,
-      | "lightColorsAmount"
-      | "lightColorsHueAngle"
-      | "lightness"
-      | "lightColorsSaturation"
-    >,
-  ) => void;
   setMode: (mode: "dark" | "light") => void;
   setCssVariables: (cssVariables: ThemeVariables["cssVariables"]) => void;
   setTheme: (theme: ThemeVariables) => void;
+  applyCustomTheme: (flag: boolean) => void;
 };
 
 const DEFAULT_COLOR = Color("#1350f4").rgbNumber();
 
 function getThemeVariablesDefaultValues(): ThemeVariables {
   const color = Color(DEFAULT_COLOR);
-  const darkColors = getColorsList(5, 100, "black", 0, 0, color.hex()).map(
-    (color) => Color(color).hex(),
-  );
-  const lightColors = getColorsList(5, 100, "white", 0, 0, color.hex()).map(
-    (color) => Color(color).hex(),
-  );
 
   const hex = color.hex();
   return {
@@ -119,18 +87,9 @@ function getThemeVariablesDefaultValues(): ThemeVariables {
     r: color.red(),
     g: color.green(),
     b: color.blue(),
-    darkColorsAmount: 5,
-    darkness: 100,
-    darkColorsHueAngle: 0,
-    darkColorsSaturation: 0,
-    lightColorsAmount: 5,
-    lightness: 100,
-    lightColorsHueAngle: 0,
-    lightColorsSaturation: 0,
-    darkColors,
-    lightColors,
+    isCustomTheme: false,
     cssVariables: {
-      shadcn: generateShadcnColorAttributes({ hex, darkColors, lightColors }),
+      shadcn: generateShadcnColorAttributes({ hex }),
     },
   };
 }
@@ -140,11 +99,10 @@ const ThemeContext = createContext<ThemeContextType>({
   setMainColor: () => {},
   setRGB: () => {},
   setHex: () => {},
-  setDarkThemeSettings: () => {},
-  setLightThemeSettings: () => {},
   setMode: () => {},
   setCssVariables: () => {},
   setTheme: () => {},
+  applyCustomTheme: () => {},
 });
 
 export function ThemeContextProvider({ children }: { children: ReactNode }) {
@@ -152,42 +110,22 @@ export function ThemeContextProvider({ children }: { children: ReactNode }) {
     getThemeVariablesDefaultValues(),
   );
 
+  const [isCustomTheme, setIsCustomTheme] = useState<boolean>(false);
+
   useEffect(() => {
-    const { hex, lightColors, darkColors, cssVariables } = variables;
-
-    setVariables({
-      ...variables,
-      cssVariables: {
-        shadcn: generateShadcnColorAttributes({
-          hex,
-          darkColors,
-          lightColors,
-          shadcnVariables: cssVariables,
-        }),
-      },
-    });
-  }, [variables.hex, variables.lightColors, variables.darkColors]);
-
-  function updatePaletteThemes(mainColor: string = variables.hex) {
-    return {
-      lightColors: getColorsList(
-        variables.lightColorsAmount,
-        variables.lightness,
-        "white",
-        variables.lightColorsHueAngle,
-        variables.lightColorsSaturation,
-        mainColor,
-      ),
-      darkColors: getColorsList(
-        variables.darkColorsAmount,
-        variables.darkness,
-        "black",
-        variables.darkColorsHueAngle,
-        variables.darkColorsSaturation,
-        mainColor,
-      ),
-    };
-  }
+    if (!isCustomTheme) {
+      const { hex, cssVariables } = variables;
+      setVariables({
+        ...variables,
+        cssVariables: {
+          shadcn: generateShadcnColorAttributes({
+            hex,
+            shadcnVariables: cssVariables,
+          }),
+        },
+      });
+    }
+  }, [variables.hex]);
 
   function setTheme(theme: ThemeVariables) {
     setVariables(theme);
@@ -203,7 +141,6 @@ export function ThemeContextProvider({ children }: { children: ReactNode }) {
       r: obj.red(),
       g: obj.green(),
       b: obj.blue(),
-      ...updatePaletteThemes(obj.hex()),
     });
   }
 
@@ -217,7 +154,6 @@ export function ThemeContextProvider({ children }: { children: ReactNode }) {
       r,
       g,
       b,
-      ...updatePaletteThemes(obj.hex()),
     });
   }
 
@@ -231,77 +167,15 @@ export function ThemeContextProvider({ children }: { children: ReactNode }) {
       r: obj.red(),
       g: obj.green(),
       b: obj.blue(),
-      ...updatePaletteThemes(hex),
-    });
-  }
-
-  function setDarkThemeSettings(
-    darkThemeSettings: Pick<
-      ThemeVariables,
-      | "darkColorsAmount"
-      | "darkColorsHueAngle"
-      | "darkness"
-      | "darkColorsSaturation"
-    >,
-  ) {
-    const {
-      darkColorsAmount,
-      darkColorsHueAngle,
-      darkColorsSaturation,
-      darkness,
-    } = darkThemeSettings;
-
-    setVariables({
-      ...variables,
-      darkColorsAmount,
-      darkColorsHueAngle,
-      darkColorsSaturation,
-      darkness,
-      darkColors: getColorsList(
-        darkColorsAmount,
-        darkness,
-        "black",
-        darkColorsHueAngle,
-        darkColorsSaturation,
-        variables.hex,
-      ),
-    });
-  }
-  function setLightThemeSettings(
-    lightThemeSettings: Pick<
-      ThemeVariables,
-      | "lightColorsAmount"
-      | "lightColorsHueAngle"
-      | "lightness"
-      | "lightColorsSaturation"
-    >,
-  ) {
-    const {
-      lightColorsAmount,
-      lightColorsHueAngle,
-      lightColorsSaturation,
-      lightness,
-    } = lightThemeSettings;
-
-    setVariables({
-      ...variables,
-      lightColorsAmount,
-      lightColorsHueAngle,
-      lightColorsSaturation,
-      lightness,
-      lightColors: getColorsList(
-        lightColorsAmount,
-        lightness,
-        "white",
-        lightColorsHueAngle,
-        lightColorsSaturation,
-        variables.hex,
-      ),
     });
   }
 
   function setMode(mode: "dark" | "light") {
     setVariables({ ...variables, mode });
+  }
+
+  function applyCustomTheme(flag: boolean) {
+    setIsCustomTheme(flag);
   }
 
   function setCssVariables(cssVariables: ThemeVariables["cssVariables"]) {
@@ -420,11 +294,11 @@ export function ThemeContextProvider({ children }: { children: ReactNode }) {
         setMainColor,
         setRGB,
         setHex,
-        setDarkThemeSettings,
-        setLightThemeSettings,
         setMode,
         setCssVariables,
         setTheme,
+        applyCustomTheme,
+        isCustomTheme,
       }}
     >
       {children}

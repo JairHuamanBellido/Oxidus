@@ -9,7 +9,7 @@ import {
 import { cn } from "@/src/utils/utils";
 import { MoonIcon, SunIcon } from "lucide-react";
 
-export default function ThemeToggle() {
+export default function ToggleThemeMenuItem() {
   const { setMode, mode } = useThemeContext();
 
   return (
@@ -17,15 +17,19 @@ export default function ThemeToggle() {
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" className="w-9 px-0">
           <SunIcon
+            strokeWidth={1.5}
+            size={20}
             className={cn(
-              "h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all ",
+              " rotate-0 scale-100 transition-all ",
               { "-rotate-90": mode === "dark" },
               { "scale-0": mode === "dark" },
             )}
           />
           <MoonIcon
+            strokeWidth={1.5}
+            size={20}
             className={cn(
-              "absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100",
+              "absolute rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100",
               { "rotate-0": mode === "dark" },
               { "scale-100": mode === "dark" },
             )}

@@ -46,6 +46,14 @@ export interface ShadcnVariables {
   chart3: ColorState;
   chart4: ColorState;
   chart5: ColorState;
+  sidebarBackground: ColorState;
+  sidebarForeground: ColorState;
+  sidebarPrimary: ColorState;
+  sidebarPrimaryForeground: ColorState;
+  sidebarAccent: ColorState;
+  sidebarAccentForeground: ColorState;
+  sidebarBorder: ColorState;
+  sidebarRing: ColorState;
 }
 
 export type ThemeVariables = {

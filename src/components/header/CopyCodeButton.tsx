@@ -1,12 +1,6 @@
 import * as React from "react";
 
 import { ClipboardIcon } from "lucide-react";
-import {
-  TooltipProvider,
-  TooltipTrigger,
-  TooltipContent,
-  Tooltip,
-} from "../shadcn/tooltip";
 import { Button } from "../shadcn/button";
 import { useToast } from "@/src/components/shadcn/use-toast";
 
@@ -33,17 +27,12 @@ export default function CopyButton({ codeToCopy }: CopyButtonProps) {
   };
 
   return (
-    <TooltipProvider>
-      <Tooltip>
-        <TooltipTrigger>
-          <Button variant="ghost" onClick={handleCopy}>
-            Copy to Clipboard <ClipboardIcon className="ml-2 h-4 w-4" />
-          </Button>
-        </TooltipTrigger>
-        <TooltipContent>
-          <p>Click to copy</p>
-        </TooltipContent>
-      </Tooltip>
-    </TooltipProvider>
+    <Button
+      className="p-2 text-foreground h-fit w-fit"
+      variant="ghost"
+      onClick={handleCopy}
+    >
+      <ClipboardIcon className=" h-4 w-4" />
+    </Button>
   );
 }

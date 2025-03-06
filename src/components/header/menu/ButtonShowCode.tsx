@@ -18,9 +18,17 @@ import {
   TabsTrigger,
 } from "@/src/components/shadcn/tabs";
 import { generateShadcnCssVariables } from "@/src/utils/generateShadcnCssVariables";
-import SyntaxHighlighter from "react-syntax-highlighter/dist/esm/default-highlight";
+
 import CopyButton from "../CopyCodeButton";
 import { Code } from "lucide-react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../../shadcn/select";
+import { generateSyntaxHighlighter } from "@/src/utils/generateSyntaxHighlighter";
 
 export default function ShowCodeMenuItem() {
   const {
@@ -28,20 +36,18 @@ export default function ShowCodeMenuItem() {
       shadcn: { dark, light },
     },
   } = useThemeContext();
-  const [activeTab, setActiveTab] = useState("light-code");
+  const [selectedFormat, setSelectedFormat] = useState<
+    "hsl" | "oklch" | "hsl-no-prefix" | "oklch-no-prefix"
+  >("hsl");
 
-  const lightCssPalette = generateShadcnCssVariables(light);
-  const darkCssPalette = generateShadcnCssVariables(dark);
-
-  const handleTabChange = (value: string) => {
-    setActiveTab(value);
-  };
+  const lightCssPalette = generateShadcnCssVariables(light, selectedFormat);
+  const darkCssPalette = generateShadcnCssVariables(dark, selectedFormat);
 
   return (
     <Dialog>
       <DialogTrigger asChild>
         <Button
-        className="w-9 px-0"
+          className="w-9 px-0"
           onClick={() => {
             (window as any).gtag("event", "show-css-code");
           }}
@@ -50,7 +56,7 @@ export default function ShowCodeMenuItem() {
           <Code strokeWidth={1.5} size={20} />
         </Button>
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent className="max-w-fit w-fit">
         <DialogHeader>
           <DialogTitle>CSS Variables</DialogTitle>
           <DialogDescription>
@@ -59,7 +65,7 @@ export default function ShowCodeMenuItem() {
           </DialogDescription>
         </DialogHeader>
         <div className="grid gap-4 py-4">
-          <Tabs defaultValue="light-code" onValueChange={handleTabChange}>
+          <Tabs defaultValue="light-code">
             <header className="flex items-center justify-between">
               <TabsList>
                 <TabsTrigger
@@ -79,50 +85,64 @@ export default function ShowCodeMenuItem() {
                   Dark
                 </TabsTrigger>
               </TabsList>
-
               <div>
-                {/* SHOW CODE BUTTON BASED ON THE ACTIVE TAB */}
-                {activeTab === "dark-code" ? (
-                  <CopyButton codeToCopy={darkCssPalette} />
-                ) : (
-                  <CopyButton codeToCopy={lightCssPalette} />
-                )}
+                <Select
+                  onValueChange={(value) =>
+                    setSelectedFormat(value as "hsl" | "oklch")
+                  }
+                  defaultValue={selectedFormat}
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select a theme" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="hsl">HSL</SelectItem>
+                    <SelectItem value="hsl-no-prefix">
+                      HSL (no prefix)
+                    </SelectItem>
+                    <SelectItem value="oklch">OKLCH</SelectItem>
+                    <SelectItem value="oklch-no-prefix">
+                      OKLCH (no prefix)
+                    </SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
             </header>
-            <TabsContent value="light-code">
-              <SyntaxHighlighter
-                style={{ "hljs-number": { color: "white" } }}
-                customStyle={{
-                  background: "black",
-                  color: "#c3c3c3",
-                  height: "400px",
-                  overflowY: "auto",
-                  fontSize: "0.875rem",
-                  paddingInline: "12px",
-                  borderRadius: "8px",
-                }}
-                language="css"
-              >
-                {lightCssPalette}
-              </SyntaxHighlighter>
+            <TabsContent className="relative" value="light-code">
+              <div className="absolute right-2 top-2 z-[1]">
+                <CopyButton codeToCopy={lightCssPalette} />
+              </div>
+              <pre className="h-[400px] overflow-auto text-muted-foreground">
+                <code className="flex flex-col gap-y-1" lang="css">
+                  {generateSyntaxHighlighter(lightCssPalette)
+                    .split("<br />")
+                    .map((line, index) => (
+                      <div
+                        className="block h-[20px]"
+                        key={index}
+                        dangerouslySetInnerHTML={{ __html: line }}
+                      />
+                    ))}
+                </code>
+              </pre>
             </TabsContent>
-            <TabsContent value="dark-code">
-              <SyntaxHighlighter
-                style={{ "hljs-number": { color: "white" } }}
-                customStyle={{
-                  background: "black",
-                  color: "#c3c3c3",
-                  height: "400px",
-                  overflowY: "auto",
-                  fontSize: "0.875rem",
-                  paddingInline: "12px",
-                  borderRadius: "8px",
-                  position: "relative",
-                }}
-                language="css"
-              >
-                {darkCssPalette}
-              </SyntaxHighlighter>
+            <TabsContent className="relative" value="dark-code">
+              <div className="absolute right-2 z-[1] top-2">
+                <CopyButton codeToCopy={darkCssPalette} />
+              </div>
+              <pre className="h-[400px] overflow-auto text-muted-foreground">
+                <code className="flex flex-col gap-y-1" lang="css">
+                  {generateSyntaxHighlighter(darkCssPalette)
+                    .split("<br />")
+                    .map((line, index) => (
+                      <div
+                        className="block h-[20px]"
+                        key={index}
+                        dangerouslySetInnerHTML={{ __html: line }}
+                      />
+                    ))}
+                </code>
+              </pre>
             </TabsContent>
           </Tabs>
         </div>

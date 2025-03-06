@@ -284,6 +284,80 @@ export function generateShadcnColorAttributes({
         ),
         isLocked: shadcnVariables?.shadcn.light.chart5.isLocked,
       },
+      sidebarBackground: {
+        color: setColorBasedOnIsLocked(
+          Color(hex).mix(Color("white"), 0.98).hex(),
+          "light",
+          "sidebarBackground",
+          shadcnVariables,
+        ),
+        isLocked: shadcnVariables?.shadcn.light.sidebarBackground.isLocked,
+      },
+      sidebarForeground: {
+        color: setColorBasedOnIsLocked(
+          lightForeground,
+          "light",
+          "sidebarForeground",
+          shadcnVariables,
+        ),
+        isLocked: shadcnVariables?.shadcn.light.sidebarForeground.isLocked,
+      },
+      sidebarPrimary: {
+        color: setColorBasedOnIsLocked(
+          primary,
+          "light",
+          "sidebarPrimary",
+          shadcnVariables,
+        ),
+        isLocked: shadcnVariables?.shadcn.light.sidebarPrimary.isLocked,
+      },
+      sidebarPrimaryForeground: {
+        color: setColorBasedOnIsLocked(
+          primaryForeground,
+          "light",
+          "sidebarPrimaryForeground",
+          shadcnVariables,
+        ),
+        isLocked:
+          shadcnVariables?.shadcn.light.sidebarPrimaryForeground.isLocked,
+      },
+      sidebarAccent: {
+        color: setColorBasedOnIsLocked(
+          primary,
+          "light",
+          "sidebarAccent",
+          shadcnVariables,
+        ),
+        isLocked: shadcnVariables?.shadcn.light.sidebarAccent.isLocked,
+      },
+      sidebarAccentForeground: {
+        color: setColorBasedOnIsLocked(
+          primaryForeground,
+          "light",
+          "sidebarAccentForeground",
+          shadcnVariables,
+        ),
+        isLocked:
+          shadcnVariables?.shadcn.light.sidebarAccentForeground.isLocked,
+      },
+      sidebarBorder: {
+        color: setColorBasedOnIsLocked(
+          Color(hex).mix(Color("white"), 0.8).hex(),
+          "light",
+          "sidebarBorder",
+          shadcnVariables,
+        ),
+        isLocked: shadcnVariables?.shadcn.light.sidebarBorder.isLocked,
+      },
+      sidebarRing: {
+        color: setColorBasedOnIsLocked(
+          hex,
+          "light",
+          "sidebarRing",
+          shadcnVariables,
+        ),
+        isLocked: shadcnVariables?.shadcn.light.sidebarRing.isLocked,
+      },
     },
     dark: {
       background: {
@@ -501,6 +575,79 @@ export function generateShadcnColorAttributes({
           shadcnVariables,
         ),
         isLocked: shadcnVariables?.shadcn.dark.chart5.isLocked,
+      },
+      sidebarBackground: {
+        color: setColorBasedOnIsLocked(
+          Color(hex).mix(Color("#0f0f0f"), 0.98).hex(),
+          "dark",
+          "sidebarBackground",
+          shadcnVariables,
+        ),
+        isLocked: shadcnVariables?.shadcn.dark.sidebarBackground.isLocked,
+      },
+      sidebarForeground: {
+        color: setColorBasedOnIsLocked(
+          darkForeground,
+          "dark",
+          "sidebarForeground",
+          shadcnVariables,
+        ),
+        isLocked: shadcnVariables?.shadcn.dark.sidebarForeground.isLocked,
+      },
+      sidebarPrimary: {
+        color: setColorBasedOnIsLocked(
+          primary,
+          "dark",
+          "sidebarPrimary",
+          shadcnVariables,
+        ),
+        isLocked: shadcnVariables?.shadcn.dark.sidebarPrimary.isLocked,
+      },
+      sidebarPrimaryForeground: {
+        color: setColorBasedOnIsLocked(
+          primaryForeground,
+          "dark",
+          "sidebarPrimaryForeground",
+          shadcnVariables,
+        ),
+        isLocked:
+          shadcnVariables?.shadcn.dark.sidebarPrimaryForeground.isLocked,
+      },
+      sidebarAccent: {
+        color: setColorBasedOnIsLocked(
+          primary,
+          "dark",
+          "sidebarAccent",
+          shadcnVariables,
+        ),
+        isLocked: shadcnVariables?.shadcn.dark.sidebarAccent.isLocked,
+      },
+      sidebarAccentForeground: {
+        color: setColorBasedOnIsLocked(
+          primaryForeground,
+          "dark",
+          "sidebarAccentForeground",
+          shadcnVariables,
+        ),
+        isLocked: shadcnVariables?.shadcn.dark.sidebarAccentForeground.isLocked,
+      },
+      sidebarBorder: {
+        color: setColorBasedOnIsLocked(
+          Color(hex).mix(Color("black"), 0.8).hex(),
+          "dark",
+          "sidebarBorder",
+          shadcnVariables,
+        ),
+        isLocked: shadcnVariables?.shadcn.dark.sidebarBorder.isLocked,
+      },
+      sidebarRing: {
+        color: setColorBasedOnIsLocked(
+          hex,
+          "dark",
+          "sidebarRing",
+          shadcnVariables,
+        ),
+        isLocked: shadcnVariables?.shadcn.dark.sidebarRing.isLocked,
       },
     },
   };

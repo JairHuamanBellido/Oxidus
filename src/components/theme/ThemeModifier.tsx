@@ -1,5 +1,5 @@
 import { useThemeContext } from "@/src/contexts/ThemeContext/ThemeContext";
-import { extractHSLValues } from "@/src/utils/getHSLValues";
+import { extractHSLValues } from "@/src/utils/extractColorValues";
 import { useEffect } from "react";
 
 export default function ThemeModifier() {
@@ -110,6 +110,39 @@ export default function ThemeModifier() {
     document.body.style.setProperty(
       "--chart-5",
       extractHSLValues(themeSelected.chart5.color),
+    );
+
+    document.body.style.setProperty(
+      "--sidebar-background",
+      extractHSLValues(themeSelected.sidebarBackground.color),
+    );
+    document.body.style.setProperty(
+      "--sidebar-foreground",
+      extractHSLValues(themeSelected.sidebarForeground.color),
+    );
+    document.body.style.setProperty(
+      "--sidebar-primary",
+      extractHSLValues(themeSelected.sidebarPrimary.color),
+    );
+    document.body.style.setProperty(
+      "--sidebar-primary-foreground",
+      extractHSLValues(themeSelected.sidebarPrimaryForeground.color),
+    );
+    document.body.style.setProperty(
+      "--sidebar-accent",
+      extractHSLValues(themeSelected.sidebarAccent.color),
+    );
+    document.body.style.setProperty(
+      "--sidebar-accent-foreground",
+      extractHSLValues(themeSelected.sidebarAccentForeground.color),
+    );
+    document.body.style.setProperty(
+      "--sidebar-border",
+      extractHSLValues(themeSelected.sidebarBorder.color),
+    );
+    document.body.style.setProperty(
+      "--sidebar-ring",
+      extractHSLValues(themeSelected.sidebarRing.color),
     );
   }, [hex, light, dark, mode]);
   return <></>;

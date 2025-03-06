@@ -24,10 +24,8 @@ export default function AccessibilityIndicatorIcon({ contrastInfo }: Props) {
           })}
         ></div>
       </HoverCardTrigger>
-      <HoverCardContent side="right" className="flex flex-col shadow-none bg-background/10 backdrop-blur-2xl">
-        <TypographyH4>Color Contrast</TypographyH4>
-
-        <div className="mt-2 space-y-2">
+      <HoverCardContent side="bottom" align="end" className="flex flex-col shadow-none bg-background/5 backdrop-blur-lg w-fit">
+        <div className="space-y-2 ">
           <TypographyParagraph className="text-foreground/80">
             Contrast: {contrastInfo.contrast.toFixed(2)}
           </TypographyParagraph>

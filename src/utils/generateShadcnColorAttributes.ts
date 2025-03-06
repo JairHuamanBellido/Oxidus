@@ -21,13 +21,10 @@ const setColorBasedOnIsLocked = (
 
 export function generateShadcnColorAttributes({
   hex,
-  darkColors,
-  lightColors,
   shadcnVariables,
 }: {
   hex: string;
-  darkColors: string[];
-  lightColors: string[];
+
   shadcnVariables?: ThemeVariables["cssVariables"];
 }) {
   const primary = hex;
@@ -35,35 +32,39 @@ export function generateShadcnColorAttributes({
     ? Color(hex).mix(Color("white"), 0.9).hex()
     : Color(hex).mix(Color("black"), 0.9).hex();
 
-  const lightBackground = lightColors[lightColors.length - 1];
+  const lightBackground = "#ffffff";
   const lightForeground = Color(hex).mix(Color("black"), 0.9).hex();
   const lightCard = Color(hex).mix(Color("white"), 0.95).hex();
   const lightCardForeground = Color(hex).mix(Color("black"), 0.9).hex();
   const lightPopover = Color("white").hex();
   const lightPopoverForeground = Color(hex).mix(Color("black"), 0.9).hex();
   const lightSecondary = Color(hex).mix(Color("white"), 0.85).hex();
-  const lightSecondaryForeground = darkColors[0];
+  const lightSecondaryForeground = "#000000";
   const lightMuted = Color(hex).mix(Color("white"), 0.9).hex();
   const lightMutedForeground = Color("white").hsl().darken(0.6).hex();
   const lightAccent = Color(hex).mix(Color("white"), 0.9).hex();
   const lightAccentForeground = Color(hex).mix(Color("black"), 0.85).hex();
-  const lightInput = Color(hex).mix(Color("black"), 0.5).mix(Color('white'),0.75).hex();
-  
-  const darkBackground = darkColors[0];
+  const lightInput = Color(hex)
+    .mix(Color("black"), 0.5)
+    .mix(Color("white"), 0.75)
+    .hex();
+
+  const darkBackground = "#000000";
   const darkForeground = Color(hex).mix(Color("white"), 0.85).hex();
   const darkCard = Color(hex).mix(Color("#0a0a0a"), 0.96).hex();
   const darkCardForeground = Color(hex).mix(Color("white"), 0.85).hex();
-  const darkPopover = darkColors[0];
+  const darkPopover = "#000000";
   const darkPopoverForeground = Color(hex).mix(Color("white"), 0.85).hex();
   const darkSecondary = Color("black").mix(Color(hex), 0.35).hex();
   const darkSecondaryForeground = Color("white").hex();
-  const darkMuted = Color(darkColors[0]).mix(Color("white"), 0.1).hex();
-  const darkMutedForeground = Color(darkColors[0])
-    .mix(Color("white"), 0.5)
-    .hex();
+  const darkMuted = Color("#000000").mix(Color("white"), 0.1).hex();
+  const darkMutedForeground = Color("#000000").mix(Color("white"), 0.5).hex();
   const darkAccent = Color("black").mix(Color(hex), 0.35).hex();
   const darkAccentForeground = Color(hex).mix(Color("white"), 0.85).hex();
-  const darkInput = Color(hex).mix(Color("white"), 0.6).mix(Color('black'),0.75).hex()
+  const darkInput = Color(hex)
+    .mix(Color("white"), 0.6)
+    .mix(Color("black"), 0.75)
+    .hex();
 
   return {
     light: {
@@ -283,6 +284,80 @@ export function generateShadcnColorAttributes({
         ),
         isLocked: shadcnVariables?.shadcn.light.chart5.isLocked,
       },
+      sidebarBackground: {
+        color: setColorBasedOnIsLocked(
+          Color(hex).mix(Color("white"), 0.98).hex(),
+          "light",
+          "sidebarBackground",
+          shadcnVariables,
+        ),
+        isLocked: shadcnVariables?.shadcn.light.sidebarBackground.isLocked,
+      },
+      sidebarForeground: {
+        color: setColorBasedOnIsLocked(
+          lightForeground,
+          "light",
+          "sidebarForeground",
+          shadcnVariables,
+        ),
+        isLocked: shadcnVariables?.shadcn.light.sidebarForeground.isLocked,
+      },
+      sidebarPrimary: {
+        color: setColorBasedOnIsLocked(
+          primary,
+          "light",
+          "sidebarPrimary",
+          shadcnVariables,
+        ),
+        isLocked: shadcnVariables?.shadcn.light.sidebarPrimary.isLocked,
+      },
+      sidebarPrimaryForeground: {
+        color: setColorBasedOnIsLocked(
+          primaryForeground,
+          "light",
+          "sidebarPrimaryForeground",
+          shadcnVariables,
+        ),
+        isLocked:
+          shadcnVariables?.shadcn.light.sidebarPrimaryForeground.isLocked,
+      },
+      sidebarAccent: {
+        color: setColorBasedOnIsLocked(
+          primary,
+          "light",
+          "sidebarAccent",
+          shadcnVariables,
+        ),
+        isLocked: shadcnVariables?.shadcn.light.sidebarAccent.isLocked,
+      },
+      sidebarAccentForeground: {
+        color: setColorBasedOnIsLocked(
+          primaryForeground,
+          "light",
+          "sidebarAccentForeground",
+          shadcnVariables,
+        ),
+        isLocked:
+          shadcnVariables?.shadcn.light.sidebarAccentForeground.isLocked,
+      },
+      sidebarBorder: {
+        color: setColorBasedOnIsLocked(
+          Color(hex).mix(Color("white"), 0.8).hex(),
+          "light",
+          "sidebarBorder",
+          shadcnVariables,
+        ),
+        isLocked: shadcnVariables?.shadcn.light.sidebarBorder.isLocked,
+      },
+      sidebarRing: {
+        color: setColorBasedOnIsLocked(
+          hex,
+          "light",
+          "sidebarRing",
+          shadcnVariables,
+        ),
+        isLocked: shadcnVariables?.shadcn.light.sidebarRing.isLocked,
+      },
     },
     dark: {
       background: {
@@ -500,6 +575,79 @@ export function generateShadcnColorAttributes({
           shadcnVariables,
         ),
         isLocked: shadcnVariables?.shadcn.dark.chart5.isLocked,
+      },
+      sidebarBackground: {
+        color: setColorBasedOnIsLocked(
+          Color(hex).mix(Color("#0f0f0f"), 0.98).hex(),
+          "dark",
+          "sidebarBackground",
+          shadcnVariables,
+        ),
+        isLocked: shadcnVariables?.shadcn.dark.sidebarBackground.isLocked,
+      },
+      sidebarForeground: {
+        color: setColorBasedOnIsLocked(
+          darkForeground,
+          "dark",
+          "sidebarForeground",
+          shadcnVariables,
+        ),
+        isLocked: shadcnVariables?.shadcn.dark.sidebarForeground.isLocked,
+      },
+      sidebarPrimary: {
+        color: setColorBasedOnIsLocked(
+          primary,
+          "dark",
+          "sidebarPrimary",
+          shadcnVariables,
+        ),
+        isLocked: shadcnVariables?.shadcn.dark.sidebarPrimary.isLocked,
+      },
+      sidebarPrimaryForeground: {
+        color: setColorBasedOnIsLocked(
+          primaryForeground,
+          "dark",
+          "sidebarPrimaryForeground",
+          shadcnVariables,
+        ),
+        isLocked:
+          shadcnVariables?.shadcn.dark.sidebarPrimaryForeground.isLocked,
+      },
+      sidebarAccent: {
+        color: setColorBasedOnIsLocked(
+          primary,
+          "dark",
+          "sidebarAccent",
+          shadcnVariables,
+        ),
+        isLocked: shadcnVariables?.shadcn.dark.sidebarAccent.isLocked,
+      },
+      sidebarAccentForeground: {
+        color: setColorBasedOnIsLocked(
+          primaryForeground,
+          "dark",
+          "sidebarAccentForeground",
+          shadcnVariables,
+        ),
+        isLocked: shadcnVariables?.shadcn.dark.sidebarAccentForeground.isLocked,
+      },
+      sidebarBorder: {
+        color: setColorBasedOnIsLocked(
+          Color(hex).mix(Color("black"), 0.8).hex(),
+          "dark",
+          "sidebarBorder",
+          shadcnVariables,
+        ),
+        isLocked: shadcnVariables?.shadcn.dark.sidebarBorder.isLocked,
+      },
+      sidebarRing: {
+        color: setColorBasedOnIsLocked(
+          hex,
+          "dark",
+          "sidebarRing",
+          shadcnVariables,
+        ),
+        isLocked: shadcnVariables?.shadcn.dark.sidebarRing.isLocked,
       },
     },
   };

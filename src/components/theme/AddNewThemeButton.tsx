@@ -36,6 +36,7 @@ export default function AddNewThemeButton() {
 
     setThemeName("");
     setIsOpen(false);
+    (window as any).gtag("event", "theme-created");
   };
   return (
     <Dialog open={open} onOpenChange={setIsOpen}>

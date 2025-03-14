@@ -92,7 +92,10 @@ const SavedThemesListContainer = ({
             <Button
               className="p-1 h-fit"
               variant={"ghost"}
-              onClick={async () => ThemeService.deleteOne(theme.id!)}
+              onClick={async () => {
+                ThemeService.deleteOne(theme.id!);
+                (window as any).gtag("event", "theme-deleted");
+              }}
             >
               <Trash className="text-foreground " size={16} />
             </Button>

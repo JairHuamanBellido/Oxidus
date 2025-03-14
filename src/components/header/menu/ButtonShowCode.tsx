@@ -87,9 +87,12 @@ export default function ShowCodeMenuItem() {
               </TabsList>
               <div>
                 <Select
-                  onValueChange={(value) =>
-                    setSelectedFormat(value as "hsl" | "oklch")
-                  }
+                  onValueChange={(value) => {
+                    setSelectedFormat(value as "hsl" | "oklch");
+                    (window as any).gtag("event", "change-prefix-css-code", {
+                      prefix: value,
+                    });
+                  }}
                   defaultValue={selectedFormat}
                 >
                   <SelectTrigger>

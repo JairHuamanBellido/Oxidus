@@ -7,7 +7,15 @@ import GraphContainer from "./layout/graph";
 import SidebarContainer from "./layout/sidebar";
 export default function ShowCase() {
   return (
-    <Tabs defaultValue="cards" className="w-full h-full">
+    <Tabs
+      defaultValue="cards"
+      className="w-full h-full"
+      onValueChange={(val) => {
+        (window as any).gtag("event", "change-tab", {
+          tabName: val,
+        });
+      }}
+    >
       <TabsList>
         <TabsTrigger value="cards">Cards</TabsTrigger>
         <TabsTrigger value="auth">Authentication</TabsTrigger>
@@ -33,7 +41,10 @@ export default function ShowCase() {
       >
         <GraphContainer />
       </TabsContent>
-      <TabsContent className="w-full h-[calc(100%_-_40px)] py-4 relative" value="sidebar">
+      <TabsContent
+        className="w-full h-[calc(100%_-_40px)] py-4 relative"
+        value="sidebar"
+      >
         <SidebarContainer />
       </TabsContent>
     </Tabs>

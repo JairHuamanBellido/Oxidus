@@ -5,6 +5,7 @@ import { Manrope } from "next/font/google";
 import { ReactNode } from "react";
 import "react-color-palette/css";
 import { Toaster } from "@/src/components/shadcn/toaster";
+import { ThemeProvider } from "@/src/components/provider/theme-provider";
 
 const inter = Manrope({ subsets: ["latin"] });
 
@@ -32,10 +33,17 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
         <GoogleAnalytics />
-        {children}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
         <Toaster />
       </body>
     </html>

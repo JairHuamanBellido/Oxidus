@@ -17,17 +17,9 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from "@/src/components/shadcn/dropdown-menu";
-import { ArrowDown, ChevronDown, Container } from "lucide-react";
+import { ChevronDown, Container } from "lucide-react";
 import { useState } from "react";
-import {
-  Area,
-  AreaChart,
-  CartesianGrid,
-  Line,
-  LineChart,
-  XAxis,
-  YAxis,
-} from "recharts";
+import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from "recharts";
 
 const cpuUsagePerContainer = [
   {
@@ -186,6 +178,7 @@ export default function LineChartDockersCPUUsage() {
             />
             {selectedContainers.map((container, index) => (
               <Area
+                key={`${container}-${index}`}
                 type="step"
                 dataKey={container}
                 stroke={`var(--color-${container})`}

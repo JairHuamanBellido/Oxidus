@@ -1,3 +1,4 @@
+"use client";
 import { Button } from "@/src/components/shadcn/button";
 import {
   Card,
@@ -18,14 +19,14 @@ import TypographyH4 from "@/src/components/typography/h4";
 import TypographyMuted from "@/src/components/typography/muted";
 import TypographyParagraph from "@/src/components/typography/paragraph";
 import { useThemeContext } from "@/src/contexts/ThemeContext/ThemeContext";
-import Color from "color";
 import Image from "next/image";
+import { useTheme } from "next-themes";
 
 export default function CardInviteMembers() {
   const {
     cssVariables: { shadcn },
-    mode,
   } = useThemeContext();
+  const { systemTheme } = useTheme();
 
   const members = [
     {
@@ -42,8 +43,8 @@ export default function CardInviteMembers() {
     },
   ];
 
-  const background = shadcn[mode].background.color;
-  const mixBackground = mode === "dark" ? "white" : "black";
+  const background = shadcn[systemTheme as "dark" | "light"].background.color;
+  const mixBackground = systemTheme === "dark" ? "white" : "black";
   return (
     <Card className="shadow-none">
       <CardHeader>
@@ -54,15 +55,7 @@ export default function CardInviteMembers() {
       </CardHeader>
       <CardContent>
         <div className="flex items-center gap-x-2">
-          <Input
-            placeholder="foo@bar.xyz"
-            style={{
-              background: Color(background)
-                .mix(Color(mixBackground), 0.03)
-                .hex(),
-            }}
-            className="p-2 w-3/4 border-none"
-          />
+          <Input placeholder="foo@bar.xyz" className="p-2 w-3/4  bg-none" />
           <Button className="w-1/4">Send</Button>
         </div>
         <div className="mt-3">

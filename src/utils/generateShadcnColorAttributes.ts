@@ -34,9 +34,9 @@ export function generateShadcnColorAttributes({
 
   const lightBackground = "#ffffff";
   const lightForeground = Color(hex).mix(Color("black"), 0.9).hex();
-  const lightCard = Color(hex).mix(Color("white"), 0.95).hex();
+  const lightCard = Color(hex).mix(Color("white"), 0.98).hex();
   const lightCardForeground = Color(hex).mix(Color("black"), 0.9).hex();
-  const lightPopover = Color("white").hex();
+  const lightPopover = Color(hex).mix(Color("white"), 0.98).hex();
   const lightPopoverForeground = Color(hex).mix(Color("black"), 0.9).hex();
   const lightSecondary = Color(hex).mix(Color("white"), 0.85).hex();
   const lightSecondaryForeground = "#000000";
@@ -53,7 +53,7 @@ export function generateShadcnColorAttributes({
   const darkForeground = Color(hex).mix(Color("white"), 0.85).hex();
   const darkCard = Color(hex).mix(Color("#0a0a0a"), 0.96).hex();
   const darkCardForeground = Color(hex).mix(Color("white"), 0.85).hex();
-  const darkPopover = "#000000";
+  const darkPopover = Color(hex).mix(Color("#0f0f0f"), 0.98).hex();
   const darkPopoverForeground = Color(hex).mix(Color("white"), 0.85).hex();
   const darkSecondary = Color("black").mix(Color(hex), 0.35).hex();
   const darkSecondaryForeground = Color("white").hex();
@@ -224,7 +224,9 @@ export function generateShadcnColorAttributes({
       },
       border: {
         color: setColorBasedOnIsLocked(
-          Color(hex).mix(Color("white"), 0.8).hex(),
+          Color("#000")
+            .mix(Color(hex).mix(Color(lightBackground), 0.92), 0.92)
+            .hex(),
           "light",
           "border",
           shadcnVariables,
@@ -407,7 +409,7 @@ export function generateShadcnColorAttributes({
       card: {
         color: setColorBasedOnIsLocked(
           darkCard,
-          "light",
+          "dark",
           "card",
           shadcnVariables,
         ),
@@ -516,7 +518,9 @@ export function generateShadcnColorAttributes({
       },
       border: {
         color: setColorBasedOnIsLocked(
-          Color(hex).mix(Color("black"), 0.8).hex(),
+          Color("#343434")
+            .mix(Color(hex).mix(Color(darkBackground), 0.8), 0.3)
+            .hex(),
           "dark",
           "border",
           shadcnVariables,

@@ -1,33 +1,39 @@
 import CardInviteMembers from "./cards/CardInviteMembers";
-import CardScore from "./cards/CardScore";
 import CardBill from "./cards/CardBill";
 import CardLightManager from "./cards/CardLightManager";
 import { SalesLineChart } from "../../chart/sales-line-chart";
-import SidebarShowCase from "../../sidebar/SidebarShowcase";
 import { PortfolioDistributionCard } from "../../chart/portfolio-distribution-chart";
-import CardDailySummary from "./cards/CardDailySummary";
-import CardAIChat from "./cards/CardAIChat";
 import CardTodayCalendar from "./cards/CardTodayCalendar";
 import CardTaskScrum from "./cards/CardTaskScrum";
 import CardContribution from "./cards/CardContribution";
-import CardKeyboard from "./cards/CardKeyboard";
+import CardResetPassword from "./cards/CardResetPassword";
+import CardShareProject from "./cards/CardShareProject";
+import CardSubscription from "./cards/CardSubscription";
+import CardStatistics from "./cards/CardStatistics";
+import CardWeather from "./cards/CardWeather";
 
 function CardContainer() {
   return (
-    <div className="w-full bg-background rounded p-4 grid grid-cols-[repeat(auto-fill,minmax(500px,4fr))] gap-4">
-      <CardScore />
-      <CardInviteMembers />
-      <CardBill />
-      <CardLightManager />
-      <SalesLineChart />
-      <SidebarShowCase />
-      <PortfolioDistributionCard />
-      <CardTodayCalendar />
-      <CardDailySummary />
-      <CardTaskScrum />
-      <CardKeyboard />
-      <CardContribution />
-      <CardAIChat />
+    <div className="w-full bg-background rounded p-4 grid grid-cols-[repeat(auto-fill,minmax(350px,3fr))] gap-4 ">
+      <div className="w-full flex flex-col space-y-4">
+        <CardResetPassword />
+        <SalesLineChart />
+        <CardStatistics />
+        <CardWeather />
+        <CardContribution />
+      </div>
+      <div className="w-full space-y-4">
+        <CardShareProject />
+        <CardInviteMembers />
+        <CardLightManager />
+        <CardBill />
+        <CardTaskScrum />
+      </div>
+      <div className="w-full space-y-4">
+        <CardSubscription />
+        <PortfolioDistributionCard />
+        <CardTodayCalendar />
+      </div>
     </div>
   );
 }

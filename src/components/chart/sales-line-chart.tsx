@@ -42,7 +42,7 @@ const chartConfig = {
 
 export function SalesLineChart() {
   return (
-    <Card className="border-none bg-transparent">
+    <Card>
       <CardHeader>
         <CardTitle className="text-muted-foreground text-base">Sales</CardTitle>
         <CardDescription className="text-foreground text-2xl">

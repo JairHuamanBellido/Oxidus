@@ -8,9 +8,9 @@ import {
   useState,
 } from "react";
 import Color from "color";
-import { getColorsList } from "@/src/utils/getColorsList";
 import { generateShadcnColorAttributes } from "@/src/utils/generateShadcnColorAttributes";
 import { getContrastInfo } from "@/src/utils/colors";
+import { useTheme } from "next-themes";
 
 export type ContrastLevels = "low" | "medium" | "good" | "excellent";
 export type ContrastInfo = {
@@ -82,15 +82,17 @@ export type ThemeContextType = ThemeVariables & {
   applyCustomTheme: (flag: boolean) => void;
 };
 
-const DEFAULT_COLOR = Color("#1350f4").rgbNumber();
+const DEFAULT_COLOR = Color("#bef413").rgbNumber();
 
-function getThemeVariablesDefaultValues(): ThemeVariables {
+function getThemeVariablesDefaultValues(
+  resolvedTheme: "dark" | "light",
+): ThemeVariables {
   const color = Color(DEFAULT_COLOR);
 
   const hex = color.hex();
   return {
     mainColor: DEFAULT_COLOR,
-    mode: "dark",
+    mode: resolvedTheme,
     hex,
     r: color.red(),
     g: color.green(),
@@ -103,7 +105,7 @@ function getThemeVariablesDefaultValues(): ThemeVariables {
 }
 
 const ThemeContext = createContext<ThemeContextType>({
-  ...getThemeVariablesDefaultValues(),
+  ...getThemeVariablesDefaultValues("light"),
   setMainColor: () => {},
   setRGB: () => {},
   setHex: () => {},
@@ -114,8 +116,9 @@ const ThemeContext = createContext<ThemeContextType>({
 });
 
 export function ThemeContextProvider({ children }: { children: ReactNode }) {
+  const { systemTheme } = useTheme();
   const [variables, setVariables] = useState<ThemeVariables>(() =>
-    getThemeVariablesDefaultValues(),
+    getThemeVariablesDefaultValues(systemTheme as "dark" | "light"),
   );
 
   const [isCustomTheme, setIsCustomTheme] = useState<boolean>(false);

@@ -8,10 +8,15 @@ import {
 } from "@/src/components/shadcn/dropdown-menu";
 import { cn } from "@/src/utils/utils";
 import { MoonIcon, SunIcon } from "lucide-react";
+import { useEffect } from "react";
+import { useTheme } from "next-themes";
 
 export default function ToggleThemeMenuItem() {
-  const { setMode, mode } = useThemeContext();
-
+  const { setMode } = useThemeContext();
+  const { setTheme, systemTheme } = useTheme();
+  useEffect(() => {
+    setMode(systemTheme as "dark" | "light");
+  }, [systemTheme]);
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -21,8 +26,8 @@ export default function ToggleThemeMenuItem() {
             size={20}
             className={cn(
               " rotate-0 scale-100 transition-all ",
-              { "-rotate-90": mode === "dark" },
-              { "scale-0": mode === "dark" },
+              { "-rotate-90": systemTheme === "dark" },
+              { "scale-0": systemTheme === "dark" },
             )}
           />
           <MoonIcon
@@ -30,8 +35,8 @@ export default function ToggleThemeMenuItem() {
             size={20}
             className={cn(
               "absolute rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100",
-              { "rotate-0": mode === "dark" },
-              { "scale-100": mode === "dark" },
+              { "rotate-0": systemTheme === "dark" },
+              { "scale-100": systemTheme === "dark" },
             )}
           />
           <span className="sr-only">Toggle theme</span>
@@ -40,6 +45,7 @@ export default function ToggleThemeMenuItem() {
       <DropdownMenuContent align="end">
         <DropdownMenuItem
           onClick={() => {
+            setTheme("light");
             setMode("light");
             (window as any).gtag("event", "light-mode");
           }}
@@ -48,6 +54,7 @@ export default function ToggleThemeMenuItem() {
         </DropdownMenuItem>
         <DropdownMenuItem
           onClick={() => {
+            setTheme("dark");
             setMode("dark");
             (window as any).gtag("event", "dark-mode");
           }}

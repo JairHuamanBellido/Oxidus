@@ -37,7 +37,6 @@ export default function ColorPickerMenuItem() {
           hideInput={["hsv"]}
           hideAlpha
           onChange={(newColor) => {
-            console.log("newColor chaingin");
             setColor(newColor);
           }}
         />

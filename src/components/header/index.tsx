@@ -21,7 +21,6 @@ export default function Header() {
         <Menu.Themes />
         <Menu.SaveChanges />
         <Menu.ColorPicker />
-        <Menu.ColorPalette />
         <Menu.ShowCode />
         <Menu.SocialMedia />
         <Menu.ToggleTheme />

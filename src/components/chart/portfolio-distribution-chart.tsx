@@ -53,7 +53,7 @@ export function PortfolioDistributionCard() {
   }, []);
 
   return (
-    <Card className="bg-transparent border-none flex flex-col">
+    <Card>
       <CardHeader>
         <CardTitle>Portfolio</CardTitle>
         <CardDescription className="text-muted-foreground">

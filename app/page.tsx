@@ -7,8 +7,9 @@ import {
 import Header from "../src/components/header";
 import ThemeModifier from "../src/components/theme/ThemeModifier";
 import Color from "color";
-import { ReactNode } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import ShowCase from "@/src/components/showcase";
+import ThemeVariablesSettingSidebar from "../src/components/sidebar/ThemeVariablesSettingSidebar";
 
 const Layout = ({ children }: { children: ReactNode }) => {
   const {
@@ -35,6 +36,16 @@ const Layout = ({ children }: { children: ReactNode }) => {
   );
 };
 export default function Home() {
+  const [isMounted, setIsMounted] = useState(false);
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+  if (!isMounted)
+    return (
+      <div className="w-full h-screen flex items-center justify-center loading-container">
+        <p>Loading...</p>
+      </div>
+    );
   return (
     <ThemeContextProvider>
       <main className="flex">
@@ -42,6 +53,7 @@ export default function Home() {
         <div className="w-screen h-screen relative">
           <Header />
           <Layout>
+            <ThemeVariablesSettingSidebar />
             <div className="flex items-center overflow-auto justify-center bg-background p-4 rounded w-full h-full relative">
               <ShowCase />
             </div>

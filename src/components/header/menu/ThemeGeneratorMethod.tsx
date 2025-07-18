@@ -36,7 +36,7 @@ export default function ThemeGeneratorMethod() {
             </TooltipContent>
           </Tooltip>
         </DropdownMenuTrigger>
-        <DropdownMenuContent className="w-[200px]">
+        <DropdownMenuContent className="w-[200px] bg-popover/20 backdrop-blur-lg">
           <DropdownMenuLabel>Generator Method</DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuItem

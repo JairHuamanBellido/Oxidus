@@ -19,7 +19,7 @@ export default function ThemesMenuItem() {
         <PopoverTrigger asChild>
           <Button className="h-fit w-fit" variant={"ghost"}>My Themes</Button>
         </PopoverTrigger>
-        <PopoverContent className="space-y-1 w-[360px] max-h-[400px] overflow-y-auto">
+        <PopoverContent className="bg-popover/20 backdrop-blur-xl space-y-1 w-[360px] max-h-[400px] overflow-y-auto">
           <div className="flex items-center justify-between border-b border-border pb-1">
             <TypographyParagraph>My Themes</TypographyParagraph>
             <AddNewThemeButton />

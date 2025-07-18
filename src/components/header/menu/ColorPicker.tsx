@@ -20,10 +20,10 @@ export default function ColorPickerMenuItem() {
           variant={"ghost"}
           className="h-fit w-fit flex items-center space-x-2"
         >
+          <div style={{ background: hex }} className="w-4 h-4 rounded"></div>
           <TypographyMuted className="text-foreground">
             Pick your color
           </TypographyMuted>
-          <div style={{ background: hex }} className="w-4 h-4 rounded"></div>
         </Button>
       </PopoverTrigger>
       <PopoverContent className="p-0 border border-border">

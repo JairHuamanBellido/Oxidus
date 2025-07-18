@@ -14,7 +14,6 @@ import { ColorPicker, useColor } from "react-color-palette";
 import { useEffect } from "react";
 import { Button } from "../shadcn/button";
 import { Lock, Unlock } from "lucide-react";
-import TypographyH3 from "../typography/h3";
 import AccessibilityIndicatorIcon from "../icon/accesibility-indicator-icon";
 import TypographyParagraph from "../typography/paragraph";
 import {
@@ -117,6 +116,7 @@ export default function ThemeVariablesSettingSidebar() {
     },
     setCssVariables,
     mode,
+    setColorPaletteGenerator,
   } = useThemeContext();
 
   const changeCssVariables = (
@@ -155,9 +155,6 @@ export default function ThemeVariablesSettingSidebar() {
   };
   return (
     <div className="min-w-[300px] overflow-y-auto p-4 h-[calc(100vh_-_80px)] relative overflow-auto  bg-background">
-      <TypographyH3 className="mb-4">
-        {mode === "dark" ? "Dark variables" : "Light variables"}
-      </TypographyH3>
       <div className="h-fit flex flex-col space-y-2  overflow-auto">
         <Accordion type="multiple" className="w-full space-y-4">
           <AccordionItem

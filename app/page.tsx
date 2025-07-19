@@ -10,6 +10,7 @@ import Color from "color";
 import { ReactNode, useEffect, useState } from "react";
 import ShowCase from "@/src/components/showcase";
 import ThemeVariablesSettingSidebar from "../src/components/sidebar/ThemeVariablesSettingSidebar";
+import Toolbar from "@/src/components/header/toolbar";
 
 const Layout = ({ children }: { children: ReactNode }) => {
   const {
@@ -54,7 +55,8 @@ export default function Home() {
           <Header />
           <Layout>
             <ThemeVariablesSettingSidebar />
-            <div className="flex items-center overflow-auto justify-center bg-background p-4 rounded w-full h-full relative">
+            <div className="flex flex-col  overflow-auto bg-background rounded w-full h-full relative">
+              <Toolbar />
               <ShowCase />
             </div>
           </Layout>

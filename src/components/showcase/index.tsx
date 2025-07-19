@@ -43,7 +43,7 @@ export default function ShowCase() {
         <CardShowcase />
       </TabsContent>
       <TabsContent
-        className="w-full h-[calc(100%_-_40px)] overflow-auto relative"
+        className="w-full h-[calc(100%_-_40px)] relative"
         value="auth"
       >
         <AuthenticationShowcase />

@@ -8,9 +8,13 @@ import {
   useState,
 } from "react";
 import Color from "color";
-import { generateShadcnColorAttributes } from "@/src/utils/generateShadcnColorAttributes";
 import { getContrastInfo } from "@/src/utils/colors";
 import { useTheme } from "next-themes";
+import {
+  ColorPaletteGenerator,
+  ColorPaletteStrategy,
+} from "@/src/application/engine/ColorPaletteGenerator";
+import { DefaultPaletteStrategy } from "@/src/application/engine/DefaultPaletteStrategy";
 
 export type ContrastLevels = "low" | "medium" | "good" | "excellent";
 export type ContrastInfo = {
@@ -70,6 +74,7 @@ export type ThemeVariables = {
   };
   isCustomTheme: boolean;
   mode: "dark" | "light";
+  colorPaletteGenerator: ColorPaletteGenerator;
 };
 
 export type ThemeContextType = ThemeVariables & {
@@ -80,6 +85,9 @@ export type ThemeContextType = ThemeVariables & {
   setCssVariables: (cssVariables: ThemeVariables["cssVariables"]) => void;
   setTheme: (theme: ThemeVariables) => void;
   applyCustomTheme: (flag: boolean) => void;
+  setColorPaletteGenerator: (
+    colorPaletteGenerator: ColorPaletteStrategy,
+  ) => void;
 };
 
 const DEFAULT_COLOR = Color("#bef413").rgbNumber();
@@ -88,7 +96,9 @@ function getThemeVariablesDefaultValues(
   resolvedTheme: "dark" | "light",
 ): ThemeVariables {
   const color = Color(DEFAULT_COLOR);
-
+  const colorPaletteGenerator = new ColorPaletteGenerator(
+    new DefaultPaletteStrategy(),
+  );
   const hex = color.hex();
   return {
     mainColor: DEFAULT_COLOR,
@@ -99,8 +109,9 @@ function getThemeVariablesDefaultValues(
     b: color.blue(),
     isCustomTheme: false,
     cssVariables: {
-      shadcn: generateShadcnColorAttributes({ hex }),
+      shadcn: colorPaletteGenerator.generateColorPalette({ hex }),
     },
+    colorPaletteGenerator,
   };
 }
 
@@ -113,6 +124,7 @@ const ThemeContext = createContext<ThemeContextType>({
   setCssVariables: () => {},
   setTheme: () => {},
   applyCustomTheme: () => {},
+  setColorPaletteGenerator: () => {},
 });
 
 export function ThemeContextProvider({ children }: { children: ReactNode }) {
@@ -129,14 +141,14 @@ export function ThemeContextProvider({ children }: { children: ReactNode }) {
       setVariables({
         ...variables,
         cssVariables: {
-          shadcn: generateShadcnColorAttributes({
+          shadcn: variables.colorPaletteGenerator.generateColorPalette({
             hex,
             shadcnVariables: cssVariables,
           }),
         },
       });
     }
-  }, [variables.hex]);
+  }, [variables.hex, variables.colorPaletteGenerator.strategy]);
 
   function setTheme(theme: ThemeVariables) {
     setVariables(theme);
@@ -187,6 +199,16 @@ export function ThemeContextProvider({ children }: { children: ReactNode }) {
 
   function applyCustomTheme(flag: boolean) {
     setIsCustomTheme(flag);
+  }
+
+  function setColorPaletteGenerator(
+    colorPaletteGenerator: ColorPaletteStrategy,
+  ) {
+    variables.colorPaletteGenerator.setStrategy(colorPaletteGenerator);
+    setVariables({
+      ...variables,
+      colorPaletteGenerator: variables.colorPaletteGenerator,
+    });
   }
 
   function setCssVariables(cssVariables: ThemeVariables["cssVariables"]) {
@@ -310,6 +332,7 @@ export function ThemeContextProvider({ children }: { children: ReactNode }) {
         setTheme,
         applyCustomTheme,
         isCustomTheme,
+        setColorPaletteGenerator,
       }}
     >
       {children}

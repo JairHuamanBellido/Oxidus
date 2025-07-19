@@ -5,6 +5,7 @@ import SocialMediaMenuItem from "./SocialMedia";
 import ColorPaletteMenuItem from "./ThemeColorsList";
 import ThemesMenuItem from "./Themes";
 import ToggleThemeMenuItem from "./ToggleTheme";
+import ThemeGeneratorMethodMenuItem from "./ThemeGeneratorMethod";
 
 export const Menu = {
   Themes: ThemesMenuItem,
@@ -14,4 +15,5 @@ export const Menu = {
   ShowCode: ShowCodeMenuItem,
   SocialMedia: SocialMediaMenuItem,
   ToggleTheme: ToggleThemeMenuItem,
+  ThemeGeneratorMethod: ThemeGeneratorMethodMenuItem,
 };

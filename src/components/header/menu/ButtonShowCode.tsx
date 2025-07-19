@@ -29,6 +29,7 @@ import {
   SelectValue,
 } from "../../shadcn/select";
 import { generateSyntaxHighlighter } from "@/src/utils/generateSyntaxHighlighter";
+import { Tooltip, TooltipContent, TooltipTrigger } from "../../shadcn/tooltip";
 
 export default function ShowCodeMenuItem() {
   const {
@@ -47,13 +48,20 @@ export default function ShowCodeMenuItem() {
     <Dialog>
       <DialogTrigger asChild>
         <Button
-          className="w-9 px-0"
+          className="w-8 px-0 h-8"
           onClick={() => {
             (window as any).gtag("event", "show-css-code");
           }}
           variant="ghost"
         >
-          <Code strokeWidth={1.5} size={20} />
+          <Tooltip>
+            <TooltipTrigger>
+              <Code strokeWidth={1.5} size={20} />
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>CSS Variables</p>
+            </TooltipContent>
+          </Tooltip>
         </Button>
       </DialogTrigger>
       <DialogContent className="max-w-fit w-fit">

@@ -6,6 +6,7 @@ import { ReactNode } from "react";
 import "react-color-palette/css";
 import { Toaster } from "@/src/components/shadcn/toaster";
 import { ThemeProvider } from "@/src/components/provider/theme-provider";
+import { TooltipProvider } from "@/src/components/shadcn/tooltip";
 
 const inter = Manrope({ subsets: ["latin"] });
 
@@ -36,14 +37,16 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
         <GoogleAnalytics />
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          {children}
-        </ThemeProvider>
+        <TooltipProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            {children}
+          </ThemeProvider>
+        </TooltipProvider>
         <Toaster />
       </body>
     </html>

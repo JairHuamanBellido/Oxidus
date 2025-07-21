@@ -43,6 +43,9 @@ export default function ThemeGeneratorMethod() {
             onClick={() => {
               setColorPaletteGenerator(new DefaultPaletteStrategy());
               setHex(hex);
+              (window as any).gtag("event", "change-theme-generator", {
+                themeGenerator: "default",
+              });
             }}
             className={cn("flex items-center justify-between")}
           >
@@ -54,6 +57,9 @@ export default function ThemeGeneratorMethod() {
             onClick={() => {
               setColorPaletteGenerator(new SoftPaletteStrategy());
               setHex(hex);
+              (window as any).gtag("event", "change-theme-generator", {
+                themeGenerator: "soft",
+              });
             }}
             className={cn("flex items-center justify-between")}
           >

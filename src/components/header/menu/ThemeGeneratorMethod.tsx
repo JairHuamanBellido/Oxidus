@@ -26,7 +26,7 @@ export default function ThemeGeneratorMethod() {
       <DropdownMenu>
         <DropdownMenuTrigger>
           <Tooltip>
-            <TooltipTrigger>
+            <TooltipTrigger asChild>
               <Button className="w-8 h-8 p-0" variant="ghost">
                 <Cpu strokeWidth={1.5} size={20} />
               </Button>

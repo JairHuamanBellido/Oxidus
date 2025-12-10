@@ -21,5 +21,5 @@ export function extractOklchValues(color: string, withPrefix: boolean = false) {
     mode: "rgb",
   });
 
-  return `${withPrefix ? "oklch(" : ""}${oklchParsed.l.toFixed(2)} ${oklchParsed.c.toFixed(2)} ${oklchParsed.h?.toFixed(2) || 0.0}${withPrefix ? ")" : ""}`;
+  return `${withPrefix ? "oklch(" : ""}${oklchParsed.l.toFixed(3)} ${oklchParsed.c.toFixed(3)} ${oklchParsed.h?.toFixed(3) || 0.0}${withPrefix ? ")" : ""}`;
 }
